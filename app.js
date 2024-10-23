@@ -111,4 +111,4 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
+// Hide suggestions if clicking outside
