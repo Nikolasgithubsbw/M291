@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Zeiterfassung</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/assets/api.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <!-- Sidebar -->
@@ -24,12 +28,13 @@
         </nav>
 
         <!-- Hauptinhalt -->
-        <div class="main-content">
+        <div id="app" class="main-content">
             <!-- Zeiterfassung -->
             <div class="time-tracking">
                 <div class="left-column">
-                    <select class="project-select form-input">
+                    <select v-model="projectId" class="project-select form-input">
                         <option>Projekt auswählen</option>
+                        <option v-for="project in projects">{{ project.Name }}</option>
                     </select>
                     <select class="task-select form-input">
                         <option>Tätigkeit auswählen</option>
@@ -40,7 +45,8 @@
                         <!-- Angepasst für das Format Stunden:Minuten (0:00) -->
                         <input type="text" class="form-input time-field" placeholder="0:00">
                     </div>
-                    <input type="text" class="description form-input" placeholder="Beschreibung der Tätigkeit - optional">
+                    <input type="text" class="description form-input"
+                        placeholder="Beschreibung der Tätigkeit - optional">
                 </div>
                 <button class="save-btn">Speichern</button>
             </div>
@@ -49,4 +55,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
