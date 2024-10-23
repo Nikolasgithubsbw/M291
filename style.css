@@ -1,0 +1,148 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 20vw;
+    background-color: white;
+    border-right: 0.1vw solid #ddd;
+    padding: 2vh 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+}
+
+.add-project-btn {
+    display: block;
+    width: 100%;
+    padding: 1.5vh 0;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    margin-bottom: 2vh;
+    border-radius: 0.3vw;
+    text-align: center;
+    cursor: pointer;
+}
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-list li {
+    margin: 1.5vh 0;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.4vw;
+    display: block;
+    padding-left: 0.5vw;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-tracking {
+    display: flex;
+    align-items: center;
+    gap: 2vw; /* Horizontaler Abstand zwischen den Feldern */
+    width: 70vw;
+}
+
+/* Linke Spalte (Projekt und Tätigkeit übereinander) */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    width: 30%; /* Nimmt 30% der Breite ein */
+}
+
+.project-select, .task-select {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+    width: 100%;
+    height: 6.5vh; /* Einheitliche Höhe der Dropdowns */
+}
+
+/* Rechte Spalte (Zeit und Beschreibung nebeneinander) */
+.right-column {
+    display: flex;
+    gap: 2vw;
+    width: 70%; /* Nimmt 70% der Breite ein */
+}
+
+.time-input {
+    height: calc(6.5vh * 2 + 1.5vh); /* Höher, um den Dropdowns zu entsprechen */
+    width: 20%; /* Kürzeres Zeitfeld */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-input input {
+    font-size: 1.5vw;
+    height: 100%;
+    width: 100%;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+    text-align: center;
+}
+
+.description {
+    height: calc(6.5vh * 2 + 1.5vh); /* Gleiche Höhe wie das Zeitfeld */
+    width: 75%; /* Breiteres Beschreibungsfeld */
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+}
+
+/* Speichern Button */
+.save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    width: 8vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+    margin-left: auto; /* Button nach rechts schieben */
+}
+
+.logo-container {
+    position: absolute;
+    bottom: 2vh;
+    left: 2vw;
+}
+
+.logo-container img {
+    width: 8vw;
+    height: auto;
+}

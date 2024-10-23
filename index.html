@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zeiterfassung</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
+            <ul class="nav-list">
+                <li><a href="index.html">Zeiterfassung</a></li>
+                <li><a href="projekte.html">Projekte</a></li>
+            </ul>
+            <div class="logo-container">
+                <img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <!-- Zeiterfassung -->
+            <div class="time-tracking">
+                <div class="left-column">
+                    <select class="project-select">
+                        <option>Projekt auswählen</option>
+                    </select>
+                    <select class="task-select">
+                        <option>Tätigkeit auswählen</option>
+                    </select>
+                </div>
+                <div class="right-column">
+                    <div class="time-input">
+                        <input type="time" placeholder="00:00">
+                    </div>
+                    <input type="text" class="description" placeholder="Beschreibung der Tätigkeit - optional">
+                </div>
+                <button class="save-btn">Speichern</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
