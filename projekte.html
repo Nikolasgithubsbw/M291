@@ -3,30 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projekte Übersicht</title>
+    <title>Projektübersicht</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Sidebar (keine Änderungen) -->
         <nav class="sidebar">
-            <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
-            <ul class="nav-list">
-                <li><a href="index.html">Zeiterfassung</a></li>
-                <li><a href="projekte.html">Projekte</a></li>
-            </ul>
+            <div class="content">
+                <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
+                <ul class="nav-list">
+                    <li><a href="index.html">Zeiterfassung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                </ul>
+            </div>
             <div class="logo-container">
                 <img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
+                <p>Made by Laurin & Niki</p>
             </div>
         </nav>
 
+        <!-- Main content (Projektübersicht) -->
         <div class="main-content">
-            <h2>Projektübersicht</h2>
-            <!-- Projektliste -->
             <ul class="project-list">
-                <!-- Dynamisch durch API -->
+                <!-- Project Item with Dropdown -->
+                <li class="project-item">
+                    <span class="project-name">Laurins wunderprojekt</span>
+                    <button class="dropdown-btn">
+                        <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown">
+                    </button>
+                    <div class="project-details">
+                        <label>Projektname</label>
+                        <input type="text" class="form-input" value="Landingpage xponetiq.com">
+                        
+                        <label>Kunde</label>
+                        <input type="text" class="form-input" value="21 Impact Labs AG – K0030">
+                        
+                        <label>Zugewiesene Personen</label>
+                        <!-- Display list of assigned people -->
+                        <div class="assigned-people-list">
+                            <div class="person">
+                                <span>Simon Pfister</span>
+                                <button class="remove-person-btn">Entfernen</button>
+                            </div>
+                            <div class="person">
+                                <span>Cheyenne Wäny</span>
+                                <button class="remove-person-btn">Entfernen</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dropdown to add new people -->
+                        <select class="form-input select-person">
+                            <option value="" disabled selected>Weitere Person wählen</option>
+                            <option value="Person 1">Person 1</option>
+                            <option value="Person 2">Person 2</option>
+                            <option value="Person 3">Person 3</option>
+                            <!-- Add more people as options here -->
+                        </select>
+
+                        <div class="button-group">
+                            <button class="delete-btn">Löschen</button>
+                            <button class="save-btn">Speichern</button>
+                        </div>
+                    </div>
+                </li>
+                <!-- Additional project items can be added here -->
             </ul>
         </div>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>

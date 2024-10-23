@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Zeiterfassung</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Sidebar -->
         <nav class="sidebar">
-            <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
-            <ul class="nav-list">
-                <li><a href="index.html">Zeiterfassung</a></li>
-                <li><a href="projekte.html">Projekte</a></li>
-            </ul>
+            <div class="content">
+                <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
+                <ul class="nav-list">
+                    <li><a href="index.html">Zeiterfassung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                </ul>
+            </div>
             <div class="logo-container">
                 <img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
+                <p>Made by Laurin & Niki</p>
             </div>
         </nav>
 
+        <!-- Hauptinhalt -->
         <div class="main-content">
             <!-- Zeiterfassung -->
             <div class="time-tracking">
                 <div class="left-column">
-                    <select class="project-select">
+                    <select class="project-select form-input">
                         <option>Projekt auswählen</option>
                     </select>
-                    <select class="task-select">
+                    <select class="task-select form-input">
                         <option>Tätigkeit auswählen</option>
                     </select>
                 </div>
                 <div class="right-column">
                     <div class="time-input">
-                        <input type="time" placeholder="00:00">
+                        <!-- Angepasst für das Format Stunden:Minuten (0:00) -->
+                        <input type="text" class="form-input time-field" placeholder="0:00">
                     </div>
-                    <input type="text" class="description" placeholder="Beschreibung der Tätigkeit - optional">
+                    <input type="text" class="description form-input" placeholder="Beschreibung der Tätigkeit - optional">
                 </div>
                 <button class="save-btn">Speichern</button>
             </div>
