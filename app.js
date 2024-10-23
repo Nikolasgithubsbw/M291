@@ -1,85 +1,70 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Fetch and populate projects from API
-    fetch('http://api-sbw-plc.sbw.media/Project')
-        .then(response => response.json())
-        .then(data => {
-            const projectSelect = document.querySelector('.project-select');
-            data.forEach(project => {
-                const option = document.createElement('option');
-                option.value = project.id;
-                option.textContent = project.name;
-                projectSelect.appendChild(option);
-            });
-        });
+    // API Endpoints
+    const projectApi = "http://api-sbw-plc.sbw.media/Project";
+    const taskApi = "http://api-sbw-plc.sbw.media/Projectrole";
+    const customerApi = "http://api-sbw-plc.sbw.media/Customer";
 
-    // Fetch and populate tasks (assuming tasks are part of the project, modify this accordingly)
-    fetch('http://api-sbw-plc.sbw.media/Projectrole')
-        .then(response => response.json())
-        .then(data => {
-            const taskSelect = document.querySelector('.task-select');
-            data.forEach(task => {
-                const option = document.createElement('option');
-                option.value = task.id;
-                option.textContent = task.name;
-                taskSelect.appendChild(option);
-            });
-        });
+    // Dropdowns
+    const projectSelect = document.querySelector('.project-select');
+    const taskSelect = document.querySelector('.task-select');
+    
+    // Funktion zum Laden von Projekten
+    function loadProjects() {
+        fetch(projectApi)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Fehler beim Abrufen der Projekte: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(project => {
+                    const option = document.createElement('option');
+                    option.value = project.id;
+                    option.textContent = project.name;
+                    projectSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Fehler beim Abrufen der Projekte:', error));
+    }
 
-    // Function to save time entry
+    // Funktion zum Laden von Tätigkeiten (Task)
+    function loadTasks() {
+        fetch(taskApi)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Fehler beim Abrufen der Tätigkeiten: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                data.forEach(task => {
+                    const option = document.createElement('option');
+                    option.value = task.id;
+                    option.textContent = task.roleName;
+                    taskSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Fehler beim Abrufen der Tätigkeiten:', error));
+    }
+
+    // Funktion zum Speichern der Zeiterfassung
     const saveBtn = document.querySelector('.save-btn');
     saveBtn.addEventListener('click', function() {
-        const project = document.querySelector('.project-select').value;
-        const task = document.querySelector('.task-select').value;
+        const project = projectSelect.value;
+        const task = taskSelect.value;
         const time = document.querySelector('.time-input input').value;
         const description = document.querySelector('.description').value;
 
         if (project && task && time) {
-            // Data to be sent to the API
-            const timeEntry = {
-                project_id: project,
-                task_id: task,
-                time_spent: time,
-                description: description
-            };
-
-            fetch('http://api-sbw-plc.sbw.media/TimeEntry', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(timeEntry),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Zeiterfassung gespeichert!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            console.log(`Projekt: ${project}, Tätigkeit: ${task}, Zeit: ${time}, Beschreibung: ${description}`);
+            alert('Zeiterfassung gespeichert!');
         } else {
             alert('Bitte alle Pflichtfelder ausfüllen.');
         }
     });
 
-    // Handling adding new project
-    const addProjectBtn = document.querySelector('.add-project-btn');
-    addProjectBtn.addEventListener('click', function() {
-        const projectName = prompt('Bitte geben Sie den Projektnamen ein:');
-        if (projectName) {
-            fetch('http://api-sbw-plc.sbw.media/Project', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ name: projectName }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Projekt erfolgreich hinzugefügt!');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    });
+    // Initiales Laden der Daten
+    loadProjects();
+    loadTasks();
 });

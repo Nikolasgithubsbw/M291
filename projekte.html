@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projektübersicht</title>
+    <title>Projekte Übersicht</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <nav class="sidebar">
-            <button class="add-project-btn">+ Projekt hinzufügen</button>
-            <ul>
+            <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
+            <ul class="nav-list">
                 <li><a href="index.html">Zeiterfassung</a></li>
                 <li><a href="projekte.html">Projekte</a></li>
             </ul>
+            <div class="logo-container">
+                <img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
+            </div>
         </nav>
 
         <div class="main-content">
-            <!-- Projektübersicht -->
+            <h2>Projektübersicht</h2>
+            <!-- Projektliste -->
             <ul class="project-list">
-                <!-- Dynamisch mit Vue.js ausfüllen -->
-                <li>
-                    <span>Laurins wunderprojekt</span>
-                    <button class="dropdown-btn">V</button>
-                </li>
-                <!-- Mehr Projekte -->
+                <!-- Dynamisch durch API -->
             </ul>
         </div>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html>
