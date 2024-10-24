@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div id="customer" class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -25,21 +26,31 @@
 
         <!-- Hauptinhalt -->
         <div class="main-content">
-            <!-- Formular zum Erfassen eines Projekts -->
             <div class="form-container">
-                <form class="project-form">
-                    <input type="text" placeholder="Projektname" class="form-input">
-                    <select class="form-input">
-                        <option>Kunde auswählen</option>
+                <form @submit.prevent="submitForm" class="project-form">
+                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
+                    
+                    <!-- Dropdown für Kunden -->
+                    <select v-model="selectedCustomer" class="form-input">
+                        <option disabled value="">Kunde auswählen</option>
+                        <option v-for="customer in customers" :key="customer.id" :value="customer.id">
+                            {{ customer.companyName }}
+                        </option>
                     </select>
-                    <select class="form-input">
-                        <option>Personen zuweisen</option>
+
+                    <!-- Dropdown für Personen -->
+                    <select v-model="selectedPerson" class="form-input">
+                        <option disabled value="">Personen zuweisen</option>
+                        <option v-for="person in persons" :key="person.id" :value="person.id">
+                            {{ person.firstName }} {{ person.lastName }}
+                        </option>
                     </select>
+
                     <button type="submit" class="save-btn">Speichern</button>
                 </form>
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app-erfassen.js"></script>
 </body>
 </html>

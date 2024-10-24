@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projektübersicht</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <!-- Sidebar (keine Änderungen) -->
         <nav class="sidebar">
             <div class="content">
@@ -26,52 +27,41 @@
         <!-- Main content (Projektübersicht) -->
         <div class="main-content">
             <ul class="project-list">
-                <!-- Project Item with Dropdown -->
-                <li class="project-item">
-                    <span class="project-name">Laurins wunderprojekt</span>
-                    <button class="dropdown-btn">
+                <li v-for="project in projects" :key="project.id" class="project-item">
+                    <span class="project-name">{{ project.name }}</span>
+                    <button @click="toggleDetails(project.id)" class="dropdown-btn">
                         <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown">
                     </button>
-                    <div class="project-details">
+                    <div v-if="project.showDetails" class="project-details">
                         <label>Projektname</label>
-                        <input type="text" class="form-input" value="Landingpage xponetiq.com">
+                        <input v-model="project.name" type="text" class="form-input">
                         
                         <label>Kunde</label>
-                        <input type="text" class="form-input" value="21 Impact Labs AG – K0030">
+                        <input v-model="project.customer" type="text" class="form-input">
                         
                         <label>Zugewiesene Personen</label>
-                        <!-- Display list of assigned people -->
                         <div class="assigned-people-list">
-                            <div class="person">
-                                <span>Simon Pfister</span>
-                                <button class="remove-person-btn">Entfernen</button>
-                            </div>
-                            <div class="person">
-                                <span>Cheyenne Wäny</span>
-                                <button class="remove-person-btn">Entfernen</button>
+                            <div v-for="person in project.assignedPersons" :key="person.id" class="person">
+                                <span>{{ person.firstName }} {{ person.lastName }}</span>
+                                <button @cxalick="removePerson(project.id, person.id)" class="remove-person-btn">Entfernen</button>
                             </div>
                         </div>
-                        
-                        <!-- Dropdown to add new people -->
-                        <select class="form-input select-person">
-                            <option value="" disabled selected>Weitere Person wählen</option>
-                            <option value="Person 1">Person 1</option>
-                            <option value="Person 2">Person 2</option>
-                            <option value="Person 3">Person 3</option>
-                            <!-- Add more people as options here -->
+                        <select class="form-input select-person" @change="assignPerson($event, project.id)">
+                            <option disabled value="" selected>Weitere Person wählen</option>
+                            <option v-for="person in persons" :key="person.id" :value="person.id">
+                                {{ person.firstName }} {{ person.lastName }}
+                            </option>
                         </select>
 
                         <div class="button-group">
-                            <button class="delete-btn">Löschen</button>
-                            <button class="save-btn">Speichern</button>
+                            <button @click="deleteProject(project.id)" class="delete-btn">Löschen</button>
+                            <button @click="saveProject(project)" class="save-btn">Speichern</button>
                         </div>
                     </div>
                 </li>
-                <!-- Additional project items can be added here -->
             </ul>
         </div>
     </div>
-
-    <script src="app.js"></script>
+    <script src="app-projekte.js"></script>
 </body>
 </html>
