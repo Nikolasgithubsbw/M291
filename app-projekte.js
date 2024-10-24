@@ -35,3 +35,8 @@ const app = Vue.createApp({
             const personId = event.target.value;
             const project = this.projects.find(p => p.id === projectId);
             const person = this.persons.find(p => p
+            )}
+
+        )
+    },
+});
