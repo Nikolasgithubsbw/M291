@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div id="customer" class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -23,48 +24,28 @@
             </div>
         </nav>
 
-        <!-- Main Content -->
+        <!-- Hauptinhalt -->
         <div class="main-content">
-            <!-- Formular zum Erfassen eines Projekts -->
             <div class="form-container">
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <form @submit.prevent="submitForm" class="project-form">
                     <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
                     
-                    <!-- Dropdown for Customers -->
+                    <!-- Dropdown für Kunden -->
                     <select v-model="selectedCustomer" class="form-input">
                         <option disabled value="">Kunde auswählen</option>
-                        <option v-for="customer in customers" :key="customer.id" :value="customer">
+                        <option v-for="customer in customers" :key="customer.id" :value="customer.id">
                             {{ customer.companyName }}
                         </option>
                     </select>
 
-                    <!-- Dropdown for Persons -->
+                    <!-- Dropdown für Personen -->
                     <select v-model="selectedPerson" class="form-input">
                         <option disabled value="">Personen zuweisen</option>
-                        <option v-for="person in persons" :key="person.id" :value="person">
+                        <option v-for="person in persons" :key="person.id" :value="person.id">
                             {{ person.firstName }} {{ person.lastName }}
                         </option>
-=======
-                <form class="project-form">
-                    <input type="text" placeholder="Projektname" class="form-input">
-                    <select class="form-input">
-                        <option>Kunde auswählen</option>
                     </select>
-                    <select class="form-input">
-                        <option>Personen zuweisen</option>
->>>>>>> parent of 5a525d3 (v.1.87)
-=======
-                <form class="project-form">
-                    <input type="text" placeholder="Projektname" class="form-input">
-                    <select class="form-input">
-                        <option>Kunde auswählen</option>
-                    </select>
-                    <select class="form-input">
-                        <option>Personen zuweisen</option>
->>>>>>> parent of 5a525d3 (v.1.87)
-                    </select>
+
                     <button type="submit" class="save-btn">Speichern</button>
                 </form>
             </div>
@@ -73,3 +54,4 @@
     <script src="app.js"></script>
 </body>
 </html>
+ 

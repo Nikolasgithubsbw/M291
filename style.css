@@ -1,69 +1,22 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-}
-
 .container {
     display: flex;
     height: 100vh;
 }
-
+ 
 .sidebar {
     width: 20vw;
     background-color: white;
     border-right: 0.1vw solid #ddd;
     padding: 2vh 1.5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
 }
-
-.add-project-btn {
-    display: block;
-    width: 100%;
-    padding: 1.5vh 0;
-    background-color: #7cc53b;
-    color: white;
-    border: none;
-    font-size: 1.2vw;
-    margin-bottom: 2vh;
-    border-radius: 0.3vw;
-    text-align: center;
-    cursor: pointer;
-}
-
-.nav-list {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-}
-
-.nav-list li {
-    margin: 1.5vh 0;
-}
-
-.nav-list li a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.4vw;
-    display: block;
-    padding-left: 0.5vw;
-}
-
+ 
 .main-content {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
+ 
 .form-container {
     width: 400px;
     background: white;
@@ -71,7 +24,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+ 
 .form-input {
     width: 100%;
     padding: 10px;
@@ -80,7 +33,7 @@ body {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-
+ 
 .save-btn {
     width: 100%;
     padding: 12px;
@@ -91,36 +44,12 @@ body {
     border-radius: 4px;
     cursor: pointer;
 }
-
+ 
 .save-btn:hover {
     background-color: #66a930;
 }
-
-.project-item {
-    margin-bottom: 20px;
+ 
+.logo-container img {
+    width: 120px;
 }
-
-.project-details {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
-}
-
-.assigned-people-list {
-    margin-top: 10px;
-}
-
-.remove-person-btn {
-    background-color: #ff4c4c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
-    cursor: pointer;
-}
-
-.remove-person-btn:hover {
-    background-color: #ff3333;
-}
+/* logo container */
