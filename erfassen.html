@@ -6,11 +6,9 @@
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="/assets/api.js" defer></script>
 </head>
 <body>
     <div id="customer" class="container">
-        <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
                 <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
@@ -24,14 +22,12 @@
                 <p>Made by Laurin & Niki</p>
             </div>
         </nav>
- 
-        <!-- Hauptinhalt -->
+
         <div id="appp" class="main-content">
             <div class="form-container">
                 <form @submit.prevent="submitForm" class="project-form">
                     <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
                    
-                    <!-- Dropdown für Kunden -->
                     <select v-model="selectedCustomer" class="form-input">
                         <option disabled value="">Kunde auswählen</option>
                         <option v-for="customer in customers" :key="customer.id" :value="customer.id">
@@ -39,11 +35,11 @@
                         </option>
                     </select>
  
-                    <!-- Dropdown für Personen -->
                     <select v-model="StudentId" class="student-select form-input">
-                        <option>Personen zuweisen</option>
-                        <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
- 
+                        <option disabled value="">Personen zuweisen</option>
+                        <option v-for="student in students" :key="student.id" :value="student.id">
+                            {{ student.name }}
+                        </option>
                     </select>
  
                     <button type="submit" class="save-btn">Speichern</button>
@@ -51,7 +47,7 @@
             </div>
         </div>
     </div>
-    <script src="appp.js"></script>
+
+    <script src="app-erfassen.js"></script>
 </body>
 </html>
- 

@@ -3,6 +3,11 @@ const app = Vue.createApp({
         return {
             projects: [],
             persons: [],
+            projectName: '',
+            selectedCustomer: '',
+            StudentId: '',
+            customers: [],  // Kunden hinzufügen, falls benötigt
+            students: []  // Personen hinzufügen, falls benötigt
         };
     },
     methods: {
@@ -12,7 +17,7 @@ const app = Vue.createApp({
                 const data = await response.json();
                 this.projects = data.resources.map(project => ({
                     ...project,
-                    showDetails: false,  // Projekt-Details anzeigen/ausblenden
+                    showDetails: false,
                 }));
             } catch (error) {
                 console.error("Fehler beim Laden der Projekte:", error);
@@ -27,13 +32,17 @@ const app = Vue.createApp({
                 console.error("Fehler beim Laden der Personen:", error);
             }
         },
-        toggleDetails(projectId) {
-            const project = this.projects.find(p => p.id === projectId);
-            project.showDetails = !project.showDetails;
-        },
-        async assignPerson(event, projectId) {
-            const personId = event.target.value;
-            const project = this.projects.find(p => p.id === projectId);
-            const person = this.persons.find(p => p
- 
- 
+        submitForm() {
+            // Hier wird die Logik zur Formularübergabe implementiert
+            console.log('Projektname:', this.projectName);
+            console.log('Ausgewählter Kunde:', this.selectedCustomer);
+            console.log('Zugewiesene Person:', this.StudentId);
+        }
+    },
+    mounted() {
+        this.loadProjects();
+        this.loadPersons();
+    }
+});
+
+app.mount('#appp');

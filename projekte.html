@@ -9,7 +9,6 @@
 </head>
 <body>
     <div id="app" class="container">
-        <!-- Sidebar (keine Änderungen) -->
         <nav class="sidebar">
             <div class="content">
                 <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
@@ -24,7 +23,6 @@
             </div>
         </nav>
 
-        <!-- (Projektübersicht) -->
         <div class="main-content">
             <ul class="project-list">
                 <li v-for="project in projects" :key="project.id" class="project-item">
@@ -43,7 +41,7 @@
                         <div class="assigned-people-list">
                             <div v-for="person in project.assignedPersons" :key="person.id" class="person">
                                 <span>{{ person.firstName }} {{ person.lastName }}</span>
-                                <button @cxalick="removePerson(project.id, person.id)" class="remove-person-btn">Entfernen</button>
+                                <button @click="removePerson(project.id, person.id)" class="remove-person-btn">Entfernen</button>
                             </div>
                         </div>
                         <select class="form-input select-person" @change="assignPerson($event, project.id)">
@@ -62,6 +60,7 @@
             </ul>
         </div>
     </div>
+
     <script src="app-projekte.js"></script>
 </body>
 </html>

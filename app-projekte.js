@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             projects: [],
-            persons: [],
+            persons: []
         };
     },
     methods: {
@@ -12,7 +12,7 @@ const app = Vue.createApp({
                 const data = await response.json();
                 this.projects = data.resources.map(project => ({
                     ...project,
-                    showDetails: false,  // Projekt-Details anzeigen/ausblendend
+                    showDetails: false
                 }));
             } catch (error) {
                 console.error("Fehler beim Laden der Projekte:", error);
@@ -34,9 +34,16 @@ const app = Vue.createApp({
         async assignPerson(event, projectId) {
             const personId = event.target.value;
             const project = this.projects.find(p => p.id === projectId);
-            const person = this.persons.find(p => p
-            )}
-
-        )
+            const person = this.persons.find(p => p.id === personId);
+            if (person) {
+                project.assignedPersons.push(person);
+            }
+        }
     },
+    mounted() {
+        this.loadProjects();
+        this.loadPersons();
+    }
 });
+
+app.mount('#app');
