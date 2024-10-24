@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="customer" class="container">
+    <div class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -27,31 +27,30 @@
         <!-- Hauptinhalt -->
         <div class="main-content">
             <div class="form-container">
-                <form @submit.prevent="submitForm" class="project-form">
-                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
-                    
-                    <!-- Dropdown für Kunden -->
-                    <select v-model="selectedCustomer" class="form-input">
-                        <option disabled value="">Kunde auswählen</option>
-                        <option v-for="customer in customers" :key="customer.id" :value="customer.id">
-                            {{ customer.companyName }}
-                        </option>
+                <form class="project-form">
+                    <label for="project-name">Projektname</label>
+                    <input type="text" id="project-name" placeholder="Projektname" class="form-input">
+
+                    <label for="client">Kunde</label>
+                    <select id="client" class="form-input">
+                        <option>Kunde auswählen</option>
+                        <!-- Weitere Kundenoptionen hier -->
                     </select>
 
-                    <!-- Dropdown für Personen -->
-                    <select v-model="selectedPerson" class="form-input">
-                        <option disabled value="">Personen zuweisen</option>
-                        <option v-for="person in persons" :key="person.id" :value="person.id">
-                            {{ person.firstName }} {{ person.lastName }}
-                        </option>
+                    <label for="assigned-persons">Personen zuweisen</label>
+                    <select id="assigned-persons" class="form-input">
+                        <option>Personen zuweisen</option>
+                        <!-- Weitere Personenoptionen hier -->
                     </select>
 
-                    <button type="submit" class="save-btn">Speichern</button>
+                    <div class="form-buttons">
+                        <button type="submit" class="save-btn">Speichern</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <script src="app-erfassen.js"></script>
 </body>
 </html>
- 

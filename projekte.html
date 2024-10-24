@@ -9,7 +9,6 @@
 </head>
 <body>
     <div id="app" class="container">
-        <!-- Sidebar (keine Änderungen) -->
         <nav class="sidebar">
             <div class="content">
                 <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
@@ -23,45 +22,36 @@
                 <p>Made by Laurin & Niki</p>
             </div>
         </nav>
- 
-        <!-- (Projektübersicht) -->
+
         <div class="main-content">
             <ul class="project-list">
-                <!-- Project Item with Dropdown -->
-                <li class="project-item">
-                    <span class="project-name">Laurins wunderprojekt</span>
-                    <button class="dropdown-btn">
+                <li class="project-item" v-for="project in projects" :key="project.id">
+                    <span class="project-name">{{ project.name }}</span>
+                    <button class="dropdown-btn" @click="toggleDetails(project.id)">
                         <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown">
                     </button>
-                    <div class="project-details">
+                    <div v-if="project.showDetails" class="project-details">
                         <label>Projektname</label>
-                        <input type="text" class="form-input" value="Landingpage xponetiq.com">
+                        <input type="text" class="form-input" v-model="project.name">
                         
                         <label>Kunde</label>
-                        <input type="text" class="form-input" value="21 Impact Labs AG – K0030">
+                        <input type="text" class="form-input" v-model="project.customer">
                         
                         <label>Zugewiesene Personen</label>
-                        <!-- Display list of assigned people -->
                         <div class="assigned-people-list">
-                            <div class="person">
-                                <span>Simon Pfister</span>
-                                <button class="remove-person-btn">Entfernen</button>
-                            </div>
-                            <div class="person">
-                                <span>Cheyenne Wäny</span>
-                                <button class="remove-person-btn">Entfernen</button>
+                            <div v-for="person in project.assignedPersons" :key="person.id" class="person">
+                                <span>{{ person.firstName }} {{ person.lastName }}</span>
+                                <button class="remove-person-btn" @click="removePerson(project.id, person.id)">Entfernen</button>
                             </div>
                         </div>
                         
-                        <!-- Dropdown to add new people -->
-                        <select class="form-input select-person">
-                            <option value="" disabled selected>Weitere Person wählen</option>
-                            <option value="Person 1">Person 1</option>
-                            <option value="Person 2">Person 2</option>
-                            <option value="Person 3">Person 3</option>
-                            <!-- Add more people as options here -->
+                        <select v-model="selectedPerson" class="form-input">
+                            <option disabled value="">Weitere Person wählen</option>
+                            <option v-for="person in persons" :key="person.id" :value="person.id">
+                                {{ person.firstName }} {{ person.lastName }}
+                            </option>
                         </select>
- 
+
                         <div class="button-group">
                             <button @click="deleteProject(project.id)" class="delete-btn">Löschen</button>
                             <button @click="saveProject(project)" class="save-btn">Speichern</button>

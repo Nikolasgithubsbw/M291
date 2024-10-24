@@ -12,7 +12,7 @@ const app = Vue.createApp({
                 const data = await response.json();
                 this.projects = data.resources.map(project => ({
                     ...project,
-                    showDetails: false,  // Projekt-Details anzeigen/ausblendend
+                    showDetails: false,
                 }));
             } catch (error) {
                 console.error("Fehler beim Laden der Projekte:", error);
@@ -29,9 +29,22 @@ const app = Vue.createApp({
         },
         toggleDetails(projectId) {
             const project = this.projects.find(p => p.id === projectId);
-            project.showDetails = !project.showDetails;
+            if (project) {
+                project.showDetails = !project.showDetails;
+            }
         },
         async assignPerson(event, projectId) {
             const personId = event.target.value;
             const project = this.projects.find(p => p.id === projectId);
-            const person = this.persons.find(p => p
+            const person = this.persons.find(p => p.id === personId);
+
+            if (project && person) {
+                project.assignedPersons = project.assignedPersons || [];
+                project.assignedPersons.push(person);
+                // API-Aufruf für das Hinzufügen der Person zum Projekt
+            }
+        },
+        async saveProject(project) {
+            // Funktion zum Speichern eines Projekts nach Bearbeitung
+            console.log("Projekt gespeichert", project);
+       
