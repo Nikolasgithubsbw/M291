@@ -28,6 +28,7 @@
             <!-- Formular zum Erfassen eines Projekts -->
             <div class="form-container">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <form @submit.prevent="submitForm" class="project-form">
                     <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
                     
@@ -45,6 +46,15 @@
                         <option v-for="person in persons" :key="person.id" :value="person">
                             {{ person.firstName }} {{ person.lastName }}
                         </option>
+=======
+                <form class="project-form">
+                    <input type="text" placeholder="Projektname" class="form-input">
+                    <select class="form-input">
+                        <option>Kunde auswählen</option>
+                    </select>
+                    <select class="form-input">
+                        <option>Personen zuweisen</option>
+>>>>>>> parent of 5a525d3 (v.1.87)
 =======
                 <form class="project-form">
                     <input type="text" placeholder="Projektname" class="form-input">
