@@ -27,7 +27,7 @@ const customer = Vue.createApp({
                 const response = await fetch(url);
                 const data = await response.json();
                 this.customers = data.resources;
-                console.log('Customers loaded:', this.customers);  // For debugging
+                console.log('Customers loaded:', this.customers);  // console 
             } catch (error) {
                 console.error("Error loading customers:", error);
             }

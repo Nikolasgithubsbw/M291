@@ -12,7 +12,7 @@ const app = Vue.createApp({
                 const data = await response.json();
                 this.projects = data.resources.map(project => ({
                     ...project,
-                    showDetails: false,  // Projekt-Details anzeigen/ausblenden
+                    showDetails: false,  // Projekt-Details anzeigen/ausblendend
                 }));
             } catch (error) {
                 console.error("Fehler beim Laden der Projekte:", error);
