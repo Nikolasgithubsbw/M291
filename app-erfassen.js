@@ -1,48 +1,64 @@
-const app = Vue.createApp({
+const customer = Vue.createApp({
     data() {
         return {
             projects: [],
+            customers: [],
             persons: [],
             projectName: '',
             selectedCustomer: '',
-            StudentId: '',
-            customers: [],  // Kunden hinzufügen, falls benötigt
-            students: []  // Personen hinzufügen, falls benötigt
+            selectedPerson: ''
         };
     },
     methods: {
         async loadProjects() {
-            try {
-                const response = await fetch('http://api-sbw-plc.sbw.media/Project');
-                const data = await response.json();
-                this.projects = data.resources.map(project => ({
-                    ...project,
-                    showDetails: false,
-                }));
-            } catch (error) {
-                console.error("Fehler beim Laden der Projekte:", error);
-            }
+            const url = "http://api-sbw-plc.sbw.media/Project";
+            const response = await fetch(url);
+            const data = await response.json();
+            this.projects = data.resources;
+        },
+        async loadCustomers() {
+            const url = "http://api-sbw-plc.sbw.media/Customer";
+            const response = await fetch(url);
+            const data = await response.json();
+            this.customers = data.resources;
         },
         async loadPersons() {
-            try {
-                const response = await fetch('http://api-sbw-plc.sbw.media/Student');
-                const data = await response.json();
-                this.persons = data.resources;
-            } catch (error) {
-                console.error("Fehler beim Laden der Personen:", error);
-            }
+            const url = "http://api-sbw-plc.sbw.media/Student";
+            const response = await fetch(url);
+            const data = await response.json();
+            this.persons = data.resources;
         },
-        submitForm() {
-            // Hier wird die Logik zur Formularübergabe implementiert
-            console.log('Projektname:', this.projectName);
-            console.log('Ausgewählter Kunde:', this.selectedCustomer);
-            console.log('Zugewiesene Person:', this.StudentId);
+        async submitForm() {
+            const projectData = {
+                projectName: this.projectName,
+                customer: this.selectedCustomer,
+                person: this.selectedPerson
+            };
+            
+            console.log('Submitting Project:', projectData);
+
+            const url = "http://api-sbw-plc.sbw.media/Project";
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(projectData)
+            });
+            
+            if (response.ok) {
+                alert('Project saved successfully!');
+                this.projectName = '';
+                this.selectedCustomer = '';
+                this.selectedPerson = '';
+            } else {
+                alert('Failed to save the project. Please try again.');
+            }
         }
     },
     mounted() {
         this.loadProjects();
+        this.loadCustomers();
         this.loadPersons();
     }
-});
-
-app.mount('#appp');
+}).mount('#customer');

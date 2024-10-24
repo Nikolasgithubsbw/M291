@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zeiterfassung</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="/assets/api.js" defer></script>
 </head>
-
 <body>
-    <div class="container">
+    <div id="app" class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -27,33 +24,40 @@
             </div>
         </nav>
 
-        <!-- Haupt -->
-        <div id="app" class="main-content">
-            <!-- Zeiterfassung -->
+        <!-- Hauptinhalt (Zeiterfassung) -->
+        <div class="main-content">
             <div class="time-tracking">
                 <div class="left-column">
+                    <!-- Dropdown für Projekte -->
                     <select v-model="projectId" class="project-select form-input">
-                        <option>Projekt auswählen</option>
-                        <option v-for="project in projects">{{ project.Name }}</option>
+                        <option disabled value="">Projekt auswählen</option>
+                        <option v-for="project in projects" :key="project.id" :value="project.id">
+                            {{ project.name }}
+                        </option>
                     </select>
-                    <select class="task-select form-input">
-                        <option>Abteilung auswählen</option>
+
+                    <!-- Dropdown für Aufgaben -->
+                    <select v-model="selectedTask" class="task-select form-input">
+                        <option disabled value="">Tätigkeit auswählen</option>
+                        <option v-for="task in tasks" :key="task" :value="task">{{ task }}</option>
                     </select>
                 </div>
+                
                 <div class="right-column">
+                    <!-- Zeiterfassung -->
                     <div class="time-input">
-                        <!-- Angepasst für das Format Stunden:Minuten (0:00) -->
-                        <input type="text" class="form-input time-field" placeholder="0:00">
+                        <input v-model="timeSpent" type="text" class="form-input time-field" placeholder="Zeit (0:00)">
                     </div>
-                    <input type="text" class="description form-input"
-                        placeholder="Beschreibung der Tätigkeit - optional">
+                    <!-- Beschreibung -->
+                    <input v-model="description" type="text" class="description form-input" placeholder="Beschreibung der Tätigkeit - optional">
                 </div>
-                <button class="save-btn">Speichern</button>
+                <!-- Speichern-Button -->
+                <button @click="saveEntry" class="save-btn">Speichern</button>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- JavaScript für Vue.js -->
+    <script src="app.js"></script> <!-- Verbindung zu app.js -->
 </body>
-
 </html>

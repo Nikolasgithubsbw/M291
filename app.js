@@ -17,5 +17,3 @@ const app = Vue.createApp({
         this.loadProjects();
     }, 
 }).mount('#app');
-
-// app
