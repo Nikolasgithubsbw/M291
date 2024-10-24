@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
-
+ 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="/assets/api.js" defer></script>
 </head>
-
+ 
 <body>
     <div class="container">
         <!-- Sidebar -->
@@ -26,7 +26,7 @@
                 <p>Made by Laurin & Niki</p>
             </div>
         </nav>
-
+ 
         <!-- Hauptinhalt -->
         <div id="app" class="main-content">
             <!-- Zeiterfassung -->
@@ -36,7 +36,7 @@
                         <option>Projekt auswählen</option>
                         <option v-for="project in projects">{{ project.Name }}</option>
                     </select>
-                    <select v-model="UserId" class="user-select form-input">
+                    <select class="task-select form-input">
                         <option>Abteilung auswählen</option>
                     </select>
                 </div>
@@ -51,8 +51,8 @@
             </div>
         </div>
     </div>
-
+ 
     <script src="app.js"></script>
 </body>
-
+ 
 </html>
