@@ -6,6 +6,7 @@
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/assets/api.js" defer></script>
 </head>
 <body>
     <div id="customer" class="container">
@@ -25,7 +26,7 @@
         </nav>
 
         <!-- Hauptinhalt -->
-        <div class="main-content">
+        <div id="appp" class="main-content">
             <div class="form-container">
                 <form @submit.prevent="submitForm" class="project-form">
                     <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
@@ -39,11 +40,10 @@
                     </select>
 
                     <!-- Dropdown für Personen -->
-                    <select v-model="selectedPerson" class="form-input">
-                        <option disabled value="">Personen zuweisen</option>
-                        <option v-for="person in persons" :key="person.id" :value="person.id">
-                            {{ person.firstName }} {{ person.lastName }}
-                        </option>
+                    <select v-model="StudentId" class="student-select form-input">
+                        <option>Personen zuweisen</option>
+                        <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
+
                     </select>
 
                     <button type="submit" class="save-btn">Speichern</button>
@@ -51,6 +51,6 @@
             </div>
         </div>
     </div>
-    <script src="app-erfassen.js"></script>
+    <script src="appp.js"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@ const app = Vue.createApp({
     mounted() {
         this.loadProjects();
     }, 
+
 }).mount('#app');
 
 
