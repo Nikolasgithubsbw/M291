@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="customer" class="container">
+    <div class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -26,7 +25,9 @@
 
         <!-- Main Content -->
         <div class="main-content">
+            <!-- Formular zum Erfassen eines Projekts -->
             <div class="form-container">
+<<<<<<< HEAD
                 <form @submit.prevent="submitForm" class="project-form">
                     <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
                     
@@ -44,13 +45,21 @@
                         <option v-for="person in persons" :key="person.id" :value="person">
                             {{ person.firstName }} {{ person.lastName }}
                         </option>
+=======
+                <form class="project-form">
+                    <input type="text" placeholder="Projektname" class="form-input">
+                    <select class="form-input">
+                        <option>Kunde auswählen</option>
                     </select>
-
+                    <select class="form-input">
+                        <option>Personen zuweisen</option>
+>>>>>>> parent of 5a525d3 (v.1.87)
+                    </select>
                     <button type="submit" class="save-btn">Speichern</button>
                 </form>
             </div>
         </div>
     </div>
-    <script src="app-erfassen.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
