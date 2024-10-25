@@ -1,5 +1,18 @@
 # M291
 Laurin &amp; Niki Code
+
+Projekte & Verträge
+
+- Neues Projekt erstellen
+- Aufträge einem Projekt zuordnen
+- Projekt Notizen erstellen
+- Zeit zu einem Projekt eintragen ( funktioniert leider noch nicht ganz wird nicht im Projekt angezeigt )
+
+
+-----
+
+
+
 Testfälle und dokumentierte Fehler
 Testfall 1: Fehler beim Löschen eines Projekts
 Beschreibung:
@@ -68,3 +81,11 @@ Das Dropdown-Menü zur Auswahl mehrerer Personen in der Projektzuweisungsansicht
 
 Fehlerursache:
 Der Fehler wurde durch eine falsche Bindung der Daten im Dropdown verursacht. Das Dropdown war nicht korrekt mit der Liste der geladenen Personen verknüpft.
+
+
+
+
+
+----------------------------------------
+
+
