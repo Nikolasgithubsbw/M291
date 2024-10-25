@@ -7,8 +7,18 @@ const app = Vue.createApp({
             selectedProject: '',  // Ausgewähltes Projekt
             customers: [],  // Liste der Kunden
             persons: [],  // Liste der Personen
-            projects: []  // Liste der Projekte
+            projects: [],
+            Timesheet:{
+                ProjectID: "",
+                StudentID: "",
+                Date: "",
+                Minutes: ""
+            }
+            
+            
+        
         };
+        
     },
     methods: {
         // Methode zum Laden der Kunden von der API
