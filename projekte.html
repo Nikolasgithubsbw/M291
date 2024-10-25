@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="app-projekte" class="container projects-page">
+    <div id="app-projekte" class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -25,8 +25,7 @@
         </nav>
 
         <!-- Hauptinhalt -->
-        <div class="main-content">
-            <h1>Alle Projekte</h1>
+        <div class="main-content project-list-container">
             <div v-if="projects.length === 0" class="loading-message">Lade Projekte...</div>
             <div v-else>
                 <ul class="project-list">

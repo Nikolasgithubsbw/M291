@@ -484,99 +484,15 @@ select::-ms-expand {
 .save-btn:hover {
     background-color: #5cb85c;
 }
-
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-}
-
-/* Container for Layout */
-.container {
-    display: flex;
-    height: 100vh;
-}
-
-/* Sidebar Styling */
-.sidebar {
-    width: 20vw;
-    background-color: white;
-    border-right: 0.1vw solid #ddd;
-    padding: 2vh 1.5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-}
-
-.sidebar .content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.add-project-btn {
-    display: block;
-    width: 100%;
-    padding: 1.5vh 0;
-    background-color: #7cc53b;
-    color: white;
-    border: none;
-    font-size: 1.2vw;
-    margin-bottom: 2vh;
-    border-radius: 0.3vw;
-    text-align: center;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.nav-list {
-    list-style-type: none;
-    padding: 0;
-    width: 100%;
-    text-align: left;
-}
-
-.nav-list li {
-    margin: 1.5vh 0;
-}
-
-.nav-list li a {
-    text-decoration: none;
-    color: black;
-    font-size: 1.4vw;
-    display: block;
-    padding-left: 0.5vw;
-}
-
-/* Main Content Styling */
-.main-content {
-    flex: 1;
-    padding: 2vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-/* Projects Page Styling */
-.projects-page .project-list {
+/* Styling für Projektauflistung - nur für die projekte.html Seite */
+.project-list-container .project-list {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    width: 100%;
+    width: 100%; /* Volle Breite */
 }
 
-.projects-page .project-item {
+.project-list-container .project-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -586,50 +502,129 @@ body {
     cursor: pointer;
 }
 
-.projects-page .project-item .project-name {
-    font-weight: normal;
+.project-list-container .project-name {
+    font-weight: bold;
     text-align: left;
-    font-size: 1.4vw;
-    flex-grow: 1; /* Make text take up available space */
+    flex-grow: 1; /* Text nimmt verfügbaren Platz */
 }
 
-.projects-page .project-item .dropdown-btn {
+.project-list-container .dropdown-btn {
     background: none;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-left: 1vw; /* Space between text and icon */
+    margin-left: 1vw;
 }
 
-.projects-page .dropdown-btn img {
-    width: 1.2vw;
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
     height: auto;
     transition: transform 0.3s ease;
 }
 
-.projects-page .project-item.active .dropdown-btn img {
+.project-list-container .project-item.active .dropdown-btn img {
     transform: rotate(180deg);
 }
 
-/* Project Details Styling */
-.projects-page .project-details {
+/* Projekt-Details (zunächst ausgeblendet) */
+.project-list-container .project-details {
     display: none;
     flex-direction: column;
-    gap: 1vh;
-    padding: 2vh 2vw;
+    gap: 1.5vh;
+    padding: 2vh;
     border: 1px solid #ddd;
     border-radius: 0.5vw;
     margin-top: 1vh;
     background-color: #f9f9f9;
+    width: 100%;
 }
 
-.projects-page .project-item.active .project-details {
+.project-list-container .project-item.active .project-details {
     display: flex;
 }
 
-/* Save Button Styling */
-.projects-page .save-btn {
+/* Einheitliche Schriftart und Schriftgröße */
+.project-list-container {
+    font-family: Arial, sans-serif; /* Gleiche Schriftart wie auf anderen Seiten */
+    font-size: 1.2vw; /* Gleiche Schriftgröße */
+    color: #333; /* Einheitliche Textfarbe */
+}
+
+/* Scrollbare Projektauflistung */
+.project-list-container .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Volle Breite */
+    max-height: 50vh; /* Maximale Höhe der Liste (anpassen je nach Bedarf) */
+    overflow-y: auto; /* Scrollbar, wenn die Höhe überschritten wird */
+    border: 1px solid #ddd; /* Leichter Rahmen um die Liste */
+    border-radius: 0.5vw;
+}
+
+/* Projekt-Item Styling */
+.project-list-container .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.project-list-container .project-item:hover {
+    background-color: #f1f1f1; /* Leichtes Hover-Highlight */
+}
+
+/* Links-bündiger Text und Icon-Ausrichtung */
+.project-list-container .project-name {
+    font-weight: normal; /* Gleiche Gewichtung wie auf anderen Seiten */
+    text-align: left;
+    flex-grow: 1;
+    font-size: 1.2vw; /* Gleiche Größe wie andere Seiten */
+}
+
+.project-list-container .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+}
+
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.project-list-container .project-item.active .dropdown-btn img {
+    transform: rotate(180deg);
+}
+
+/* Projekt-Details */
+.project-list-container .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.project-list-container .project-item.active .project-details {
+    display: flex;
+}
+
+/* Button Styling */
+.project-list-container .save-btn {
     padding: 1.5vh;
     background-color: #7cc53b;
     color: white;
@@ -639,20 +634,98 @@ body {
     border-radius: 0.3vw;
 }
 
-/* Sidebar Logo Styling */
-.logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
+/* Allgemeine Anpassungen */
 
-.logo-container img {
-    width: 8vw;
-    height: auto;
-}
-
-.logo-container p {
-    margin-top: 1vh;
-    font-size: 1vw;
+/* Container für Projektübersicht horizontal zentrieren */
+.project-list-container {
+    font-family: Arial, sans-serif;
+    font-size: 1.2vw;
     color: #333;
+    display: flex;
+    justify-content: center; /* Horizontale Zentrierung */
+    align-items: center;
+    height: 100vh; /* Volle Höhe, damit es vertikal auch mittig bleibt */
 }
+
+/* Scrollbare Projektauflistung */
+.project-list-container .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Volle Breite */
+    max-height: 50vh; /* Maximale Höhe der Liste */
+    overflow-y: auto; /* Scrollbar bei Überlauf */
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+}
+
+/* Projekt-Item Styling */
+.project-list-container .project-item {
+    display: flex;
+    justify-content: space-between; /* Text links, Icon rechts */
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.project-list-container .project-item:hover {
+    background-color: #f1f1f1; /* Hover-Effekt */
+}
+
+/* Links-bündiger Text und Icon-Ausrichtung rechts */
+.project-list-container .project-name {
+    font-weight: normal; /* Gleiche Gewichtung wie auf anderen Seiten */
+    text-align: left;
+    flex-grow: 1;
+}
+
+.project-list-container .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+}
+
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.project-list-container .project-item.active .dropdown-btn img {
+    transform: rotate(180deg); /* Dropdown dreht sich */
+}
+
+/* Projekt-Details */
+.project-list-container .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.project-list-container .project-item.active .project-details {
+    display: flex;
+}
+
+/* Speichern Button in Projektauflistung */
+.project-list-container .save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
