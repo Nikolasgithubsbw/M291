@@ -37,7 +37,10 @@
                         <div v-if="editDropdownVisible === project.ID" class="project-details">
                             <label>Projektname: <input v-model="project.Name" /></label>
                             <label>Beschreibung: <input v-model="project.Description" /></label>
-                            <button @click="saveProject(project)" class="save-btn">Speichern</button>
+                            <div class="button-group">
+                                <button @click="saveProject(project)" class="save-btn">Speichern</button>
+                                <button @click="deleteProject(project.ID)" class="delete-btn">Löschen</button>
+                            </div>
                         </div>
                     </li>
                 </ul>

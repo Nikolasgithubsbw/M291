@@ -38,6 +38,24 @@ const appProjekte = Vue.createApp({
             } catch (error) {
                 console.error("Fehler beim Speichern des Projekts:", error);
             }
+        },
+        async deleteProject(projectId) {
+            try {
+                const response = await fetch(`https://api-sbw-plc.sbw.media/Project/${projectId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Fehler beim Löschen des Projekts');
+                }
+                // Erfolgreich gelöscht, Projekt aus der Liste entfernen
+                this.projects = this.projects.filter(project => project.ID !== projectId);
+                alert('Projekt erfolgreich gelöscht');
+            } catch (error) {
+                console.error("Fehler beim Löschen des Projekts:", error);
+            }
         }
     },
     mounted() {

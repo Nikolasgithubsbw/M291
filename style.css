@@ -917,3 +917,24 @@ select::-ms-expand {
 .project-save-btn:hover {
     background-color: #66a832;
 }
+
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 1vw;
+    padding-top: 1vh;
+}
