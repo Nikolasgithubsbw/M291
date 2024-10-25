@@ -1,52 +1,48 @@
-const app = Vue.createApp({
+const appProjekte = Vue.createApp({
     data() {
         return {
             projects: [],
-            persons: [],
+            editDropdownVisible: null
         };
     },
     methods: {
         async loadProjects() {
             try {
-                const response = await fetch('http://api-sbw-plc.sbw.media/Project');
+                const response = await fetch('https://api-sbw-plc.sbw.media/Project');
+                if (!response.ok) {
+                    throw new Error('Fehler beim Abrufen der Projekte');
+                }
                 const data = await response.json();
-                this.projects = data.resources.map(project => ({
-                    ...project,
-                    showDetails: false,
-                }));
+                this.projects = data.resources || [];
             } catch (error) {
                 console.error("Fehler beim Laden der Projekte:", error);
             }
         },
-        async loadPersons() {
-            try {
-                const response = await fetch('http://api-sbw-plc.sbw.media/Student');
-                const data = await response.json();
-                this.persons = data.resources;
-            } catch (error) {
-                console.error("Fehler beim Laden der Personen:", error);
-            }
-        },
-        toggleDetails(projectId) {
-            const project = this.projects.find(p => p.id === projectId);
-            if (project) {
-                project.showDetails = !project.showDetails;
-            }
-        },
-        async assignPerson(event, projectId) {
-            const personId = event.target.value;
-            const project = this.projects.find(p => p.id === projectId);
-            const person = this.persons.find(p => p.id === personId);
-
-            if (project && person) {
-                project.assignedPersons = project.assignedPersons || [];
-                project.assignedPersons.push(person);
-                // API-Aufruf für das Hinzufügen der Person zum Projekt
-            }
+        toggleEditDropdown(projectId) {
+            this.editDropdownVisible = this.editDropdownVisible === projectId ? null : projectId;
         },
         async saveProject(project) {
-            // Funktion zum Speichern eines Projekts nach Bearbeitung
-            console.log("Projekt gespeichert", project);
+            try {
+                console.log("Projekt speichern:", project);
+                const response = await fetch(`https://api-sbw-plc.sbw.media/Project/${project.ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(project)
+                });
+                if (!response.ok) {
+                    throw new Error('Fehler beim Speichern des Projekts');
+                }
+                alert('Projekt erfolgreich gespeichert');
+            } catch (error) {
+                console.error("Fehler beim Speichern des Projekts:", error);
+            }
         }
+    },
+    mounted() {
+        this.loadProjects();
     }
 });
+
+appProjekte.mount('#app-projekte');

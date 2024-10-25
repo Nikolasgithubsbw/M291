@@ -423,3 +423,236 @@ select::-ms-expand {
 #app-erfassen .custom-select-dropdown input[type="checkbox"] {
     margin-right: 10px;
 }
+
+.projects-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.projects-table th, .projects-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.projects-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.projects-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.projects-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-dropdown {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+}
+
+.edit-dropdown label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-dropdown input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.save-btn:hover {
+    background-color: #5cb85c;
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+/* Container for Layout */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 20vw;
+    background-color: white;
+    border-right: 0.1vw solid #ddd;
+    padding: 2vh 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.sidebar .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.add-project-btn {
+    display: block;
+    width: 100%;
+    padding: 1.5vh 0;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    margin-bottom: 2vh;
+    border-radius: 0.3vw;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.nav-list li {
+    margin: 1.5vh 0;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: black;
+    font-size: 1.4vw;
+    display: block;
+    padding-left: 0.5vw;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Projects Page Styling */
+.projects-page .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.projects-page .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+
+.projects-page .project-item .project-name {
+    font-weight: normal;
+    text-align: left;
+    font-size: 1.4vw;
+    flex-grow: 1; /* Make text take up available space */
+}
+
+.projects-page .project-item .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw; /* Space between text and icon */
+}
+
+.projects-page .dropdown-btn img {
+    width: 1.2vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.projects-page .project-item.active .dropdown-btn img {
+    transform: rotate(180deg);
+}
+
+/* Project Details Styling */
+.projects-page .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1vh;
+    padding: 2vh 2vw;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+}
+
+.projects-page .project-item.active .project-details {
+    display: flex;
+}
+
+/* Save Button Styling */
+.projects-page .save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
+/* Sidebar Logo Styling */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-container img {
+    width: 8vw;
+    height: auto;
+}
+
+.logo-container p {
+    margin-top: 1vh;
+    font-size: 1vw;
+    color: #333;
+}

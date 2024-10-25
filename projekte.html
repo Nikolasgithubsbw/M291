@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projektübersicht</title>
+    <meta charset="UTF-8">
+    <title>Projekte</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="app" class="container">
+    <div id="app-projekte" class="container projects-page">
+        <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
                 <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
@@ -23,44 +24,28 @@
             </div>
         </nav>
 
+        <!-- Hauptinhalt -->
         <div class="main-content">
-            <ul class="project-list">
-                <li class="project-item" v-for="project in projects" :key="project.id">
-                    <span class="project-name">{{ project.name }}</span>
-                    <button class="dropdown-btn" @click="toggleDetails(project.id)">
-                        <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown">
-                    </button>
-                    <div v-if="project.showDetails" class="project-details">
-                        <label>Projektname</label>
-                        <input type="text" class="form-input" v-model="project.name">
-                        
-                        <label>Kunde</label>
-                        <input type="text" class="form-input" v-model="project.customer">
-                        
-                        <label>Zugewiesene Personen</label>
-                        <div class="assigned-people-list">
-                            <div v-for="person in project.assignedPersons" :key="person.id" class="person">
-                                <span>{{ person.firstName }} {{ person.lastName }}</span>
-                                <button class="remove-person-btn" @click="removePerson(project.id, person.id)">Entfernen</button>
-                            </div>
-                        </div>
-                        
-                        <select v-model="selectedPerson" class="form-input">
-                            <option disabled value="">Weitere Person wählen</option>
-                            <option v-for="person in persons" :key="person.id" :value="person.id">
-                                {{ person.firstName }} {{ person.lastName }}
-                            </option>
-                        </select>
-
-                        <div class="button-group">
-                            <button @click="deleteProject(project.id)" class="delete-btn">Löschen</button>
+            <h1>Alle Projekte</h1>
+            <div v-if="projects.length === 0" class="loading-message">Lade Projekte...</div>
+            <div v-else>
+                <ul class="project-list">
+                    <li v-for="project in projects" :key="project.ID" class="project-item" :class="{ active: editDropdownVisible === project.ID }">
+                        <span class="project-name">{{ project.Name }}</span>
+                        <button @click="toggleEditDropdown(project.ID)" class="dropdown-btn">
+                            <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown Chevron">
+                        </button>
+                        <div v-if="editDropdownVisible === project.ID" class="project-details">
+                            <label>Projektname: <input v-model="project.Name" /></label>
+                            <label>Beschreibung: <input v-model="project.Description" /></label>
                             <button @click="saveProject(project)" class="save-btn">Speichern</button>
                         </div>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
     <script src="app-projekte.js"></script>
 </body>
 </html>
