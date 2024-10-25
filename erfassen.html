@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Projekt erfassen</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung zur CSS-Datei -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- Vue.js -->
 </head>
 <body>
     <div class="container">
@@ -23,53 +24,77 @@
             </div>
         </nav>
 
-        <!-- Main Content -->
+        <!-- Hauptinhalt -->
         <div class="main-content">
-            <!-- Formular zum Erfassen eines Projekts -->
-            <div class="form-container">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <form @submit.prevent="submitForm" class="project-form">
-                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
-                    
-                    <!-- Dropdown for Customers -->
-                    <select v-model="selectedCustomer" class="form-input">
-                        <option disabled value="">Kunde auswählen</option>
-                        <option v-for="customer in customers" :key="customer.id" :value="customer">
-                            {{ customer.companyName }}
-                        </option>
-                    </select>
+            <div id="app-erfassen" class="form-container project-form-container">
+                <form @submit.prevent="saveProject" class="project-form">
+                    <!-- Projektname -->
+                    <div class="project-form-group">
+                        <label for="projectName">Projektname</label>
+                        <input v-model="projectName" id="projectName" type="text" placeholder="Projektname" class="project-form-input" required>
+                    </div>
 
-                    <!-- Dropdown for Persons -->
-                    <select v-model="selectedPerson" class="form-input">
-                        <option disabled value="">Personen zuweisen</option>
-                        <option v-for="person in persons" :key="person.id" :value="person">
-                            {{ person.firstName }} {{ person.lastName }}
-                        </option>
-=======
-                <form class="project-form">
-                    <input type="text" placeholder="Projektname" class="form-input">
-                    <select class="form-input">
-                        <option>Kunde auswählen</option>
-                    </select>
-                    <select class="form-input">
-                        <option>Personen zuweisen</option>
->>>>>>> parent of 5a525d3 (v.1.87)
-=======
-                <form class="project-form">
-                    <input type="text" placeholder="Projektname" class="form-input">
-                    <select class="form-input">
-                        <option>Kunde auswählen</option>
-                    </select>
-                    <select class="form-input">
-                        <option>Personen zuweisen</option>
->>>>>>> parent of 5a525d3 (v.1.87)
-                    </select>
-                    <button type="submit" class="save-btn">Speichern</button>
+                    <!-- Startdatum -->
+                    <div class="project-form-group">
+                        <label for="startDate">Startdatum</label>
+                        <input v-model="projectStudent.Start" id="startDate" type="date" class="project-form-input" required>
+                    </div>
+
+                    <!-- Enddatum -->
+                    <div class="project-form-group">
+                        <label for="endDate">Enddatum</label>
+                        <input v-model="projectStudent.End" id="endDate" type="date" class="project-form-input" required>
+                    </div>
+
+                    <!-- Dropdown für Kunden -->
+                    <div class="project-form-group">
+                        <label for="customer">Kunde</label>
+                        <select v-model="selectedCustomer" id="customer" class="project-form-input" required>
+                            <option disabled value="">Kunde auswählen</option>
+                            <option v-for="customer in customers" :key="customer.ID" :value="customer.ID">
+                                {{ customer.Name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Personen-Zuweisung (Mehrfachauswahl und Suche) -->
+                    <div class="project-form-group">
+                        <label>Personen zuweisen</label>
+                        <div ref="personDropdown" class="project-form-input custom-select-container">
+                            <span @click="togglePersonDropdown">
+                                {{ selectedPersons.length > 0 ? selectedPersons.length + ' Personen ausgewählt' : 'Personen zuweisen' }}
+                            </span>
+                            <div v-if="showPersonDropdown" class="custom-select-dropdown">
+                                <input type="text" v-model="personSearch" placeholder="Suche nach Personen..." class="dropdown-search-input project-form-input">
+                                <ul>
+                                    <li v-for="person in persons" :key="person.id">
+                                        <label>
+                                            <input type="checkbox" :value="person.id" v-model="selectedPersons">
+                                            {{ person.fullname }}
+                                        </label>
+
+                                        <!-- Rollen Dropdown für jede Person -->
+                                        <select v-model="selectedRoles[person.id]" class="project-form-input" required>
+                                            <option disabled value="">Rolle auswählen</option>
+                                            <option v-for="role in roles" :key="role.ID" :value="role.ID">
+                                                {{ role.Name }}
+                                            </option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Speichern Button -->
+                    <div class="project-form-group">
+                        <button type="submit" class="project-save-btn">Projekt speichern</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="app.js"></script>
+
+    <script src="app-erfassen.js"></script>
 </body>
 </html>

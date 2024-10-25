@@ -1,19 +1,23 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
+ 
+/* Body Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
 }
-
+ 
+/* Container for Layout */
 .container {
     display: flex;
     height: 100vh;
 }
-
+ 
+/* Sidebar Styling */
 .sidebar {
     width: 20vw;
     background-color: white;
@@ -21,10 +25,18 @@ body {
     padding: 2vh 1.5vw;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+ 
+.sidebar .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
-
+ 
 .add-project-btn {
     display: block;
     width: 100%;
@@ -37,18 +49,20 @@ body {
     border-radius: 0.3vw;
     text-align: center;
     cursor: pointer;
+    text-decoration: none;
 }
-
+ 
 .nav-list {
     list-style-type: none;
     padding: 0;
     width: 100%;
+    text-align: left;
 }
-
+ 
 .nav-list li {
     margin: 1.5vh 0;
 }
-
+ 
 .nav-list li a {
     text-decoration: none;
     color: black;
@@ -56,71 +70,871 @@ body {
     display: block;
     padding-left: 0.5vw;
 }
-
+ 
+/* Main Content Styling */
 .main-content {
     flex: 1;
+    padding: 2vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-.form-container {
-    width: 400px;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ 
+/* Project List Styling */
+.project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Full width to align with container */
 }
-
-.form-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    margin-bottom: 10px;
+ 
+/* Project Item Styling */
+.project-item {
+    display: flex;
+    flex-direction: column; /* Align elements vertically */
+    padding: 2vh 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 1.2vw;
+    gap: 1vh; /* Space between dropdown and details */
+}
+ 
+.project-name {
+    font-weight: 400;
+    font-size: 1.5vw;
+}
+ 
+.dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+ 
+.dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+ 
+/* Rotate chevron when dropdown is active */
+.project-item.active .dropdown-btn img {
+    transform: rotate(180deg);
+}
+ 
+/* Project Details (Initially Hidden) */
+.project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%; /* Full width to align with project name */
 }
-
-.save-btn {
+ 
+/* Show details when active */
+.project-item.active .project-details {
+    display: flex;
+}
+ 
+/* Form Input Styling in Project Details */
+.project-details label {
+    font-size: 1.2vw;
+    margin-bottom: 0.5vh;
+}
+ 
+.project-details .form-input {
+    padding: 1vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
     width: 100%;
-    padding: 12px;
+    box-sizing: border-box;
+    margin-bottom: 1vh;
+}
+ 
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 1vw;
+    padding-top: 1vh;
+}
+ 
+/* Button Styling */
+.delete-btn, .save-btn {
+    padding: 1.5vh;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+ 
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+}
+ 
+.save-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+ 
+/* Time Tracking Section (Kept the Same) */
+.time-tracking {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    width: 100%;
+}
+ 
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    width: 30%;
+}
+ 
+.project-select, .task-select {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+    width: 100%;
+    height: 6.5vh;
+}
+ 
+.right-column {
+    display: flex;
+    gap: 2vw;
+    width: 70%;
+}
+ 
+.time-input {
+    height: calc(6.5vh * 2 + 1.5vh);
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.time-input input {
+    font-size: 1.5vw;
+    height: 100%;
+    width: 100%;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+    text-align: center;
+}
+ 
+.description {
+    height: calc(6.5vh * 2 + 1.5vh);
+    width: 75%;
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+}
+ 
+/* Save Button */
+.save-btn {
+    padding: 1.5vh;
     background-color: #7cc53b;
     color: white;
     border: none;
-    font-size: 1rem;
-    border-radius: 4px;
+    font-size: 1.2vw;
+    width: 8vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+    margin-left: auto;
+}
+ 
+/* Logo Container Styling */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+ 
+.logo-container img {
+    width: 8vw;
+    height: auto;
+}
+ 
+.logo-container p {
+    margin-top: 1vh;
+    font-size: 1vw;
+    color: #333;
+}
+ 
+/* Styling for the "Projekt hinzufügen" Form */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center form vertically */
+}
+ 
+.project-form {
+    background-color: #f2f2f2;
+    padding: 3vh 2vw;
+    border-radius: 0.5vw;
+    box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 2vh; /* Space between form inputs */
+    width: 25vw;
+}
+ 
+/* Input Fields in "Projekt hinzufügen" */
+.project-form .form-input {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff; /* White background for input fields */
+}
+ 
+/* Styling for Select Fields in the Form */
+select.form-input {
+    appearance: none;
+    background: url('Assets/svg/chevron-dropdown.svg') no-repeat right 1vw center, #fff; /* Chevron icon for dropdown */
+    background-size: 1.5vw; /* Size of the chevron icon */
+    padding-right: 3vw; /* Space for chevron */
+    cursor: pointer;
+}
+ 
+select::-ms-expand {
+    display: none; /* Hide default dropdown arrow in Edge/IE */
+}
+ 
+/* Hover and Focus Effects for Inputs */
+.project-form .form-input:hover {
+    border-color: #7cc53b;
+}
+ 
+.project-form .form-input:focus {
+    outline: none;
+    border-color: #7cc53b;
+}
+ 
+/* Form Buttons in "Projekt hinzufügen" */
+.project-form .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2vh;
+}
+ 
+.project-form .save-btn,
+.project-form .delete-btn {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+    border: none;
+}
+ 
+.project-form .save-btn {
+    background-color: #5cb85c;
+    color: white;
+}
+ 
+.project-form .delete-btn {
+    background-color: #d9534f;
+    color: white;
+}
+ 
+/* Assigned People Section */
+.assigned-people-list {
+    margin-bottom: 1.5vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+ 
+.person {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh;
+}
+/* Custom Styles für das neue Personen-Dropdown auf der erfassen Seite */
+#app-erfassen .custom-select-container {
+    position: relative;
     cursor: pointer;
 }
 
-.save-btn:hover {
-    background-color: #66a930;
+#app-erfassen .custom-select-placeholder {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-.project-item {
-    margin-bottom: 20px;
+#app-erfassen .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.project-details {
+#app-erfassen .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#app-erfassen .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#app-erfassen .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#app-erfassen .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+#app-erfassen .custom-select-dropdown label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#app-erfassen .custom-select-dropdown input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.projects-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.projects-table th, .projects-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.projects-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.projects-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.projects-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.edit-dropdown {
     margin-top: 10px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #fff;
+    background-color: #fafafa;
 }
 
-.assigned-people-list {
+.edit-dropdown label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-dropdown input {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-btn {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     margin-top: 10px;
 }
 
-.remove-person-btn {
-    background-color: #ff4c4c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 5px;
+.save-btn:hover {
+    background-color: #5cb85c;
+}
+/* Styling für Projektauflistung - nur für die projekte.html Seite */
+.project-list-container .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Volle Breite */
+}
+
+.project-list-container .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.2vw;
     cursor: pointer;
 }
 
-.remove-person-btn:hover {
-    background-color: #ff3333;
+.project-list-container .project-name {
+    font-weight: bold;
+    text-align: left;
+    flex-grow: 1; /* Text nimmt verfügbaren Platz */
+}
+
+.project-list-container .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+}
+
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.project-list-container .project-item.active .dropdown-btn img {
+    transform: rotate(180deg);
+}
+
+/* Projekt-Details (zunächst ausgeblendet) */
+.project-list-container .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.project-list-container .project-item.active .project-details {
+    display: flex;
+}
+
+/* Einheitliche Schriftart und Schriftgröße */
+.project-list-container {
+    font-family: Arial, sans-serif; /* Gleiche Schriftart wie auf anderen Seiten */
+    font-size: 1.2vw; /* Gleiche Schriftgröße */
+    color: #333; /* Einheitliche Textfarbe */
+}
+
+/* Scrollbare Projektauflistung */
+.project-list-container .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Volle Breite */
+    max-height: 50vh; /* Maximale Höhe der Liste (anpassen je nach Bedarf) */
+    overflow-y: auto; /* Scrollbar, wenn die Höhe überschritten wird */
+    border: 1px solid #ddd; /* Leichter Rahmen um die Liste */
+    border-radius: 0.5vw;
+}
+
+/* Projekt-Item Styling */
+.project-list-container .project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.project-list-container .project-item:hover {
+    background-color: #f1f1f1; /* Leichtes Hover-Highlight */
+}
+
+/* Links-bündiger Text und Icon-Ausrichtung */
+.project-list-container .project-name {
+    font-weight: normal; /* Gleiche Gewichtung wie auf anderen Seiten */
+    text-align: left;
+    flex-grow: 1;
+    font-size: 1.2vw; /* Gleiche Größe wie andere Seiten */
+}
+
+.project-list-container .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+}
+
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.project-list-container .project-item.active .dropdown-btn img {
+    transform: rotate(180deg);
+}
+
+/* Projekt-Details */
+.project-list-container .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.project-list-container .project-item.active .project-details {
+    display: flex;
+}
+
+/* Button Styling */
+.project-list-container .save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
+/* Allgemeine Anpassungen */
+
+/* Container für Projektübersicht horizontal zentrieren */
+.project-list-container {
+    font-family: Arial, sans-serif;
+    font-size: 1.2vw;
+    color: #333;
+    display: flex;
+    justify-content: center; /* Horizontale Zentrierung */
+    align-items: center;
+    height: 100vh; /* Volle Höhe, damit es vertikal auch mittig bleibt */
+}
+
+/* Scrollbare Projektauflistung */
+.project-list-container .project-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Volle Breite */
+    max-height: 50vh; /* Maximale Höhe der Liste */
+    overflow-y: auto; /* Scrollbar bei Überlauf */
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+}
+
+/* Projekt-Item Styling */
+.project-list-container .project-item {
+    display: flex;
+    justify-content: space-between; /* Text links, Icon rechts */
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.project-list-container .project-item:hover {
+    background-color: #f1f1f1; /* Hover-Effekt */
+}
+
+/* Links-bündiger Text und Icon-Ausrichtung rechts */
+.project-list-container .project-name {
+    font-weight: normal; /* Gleiche Gewichtung wie auf anderen Seiten */
+    text-align: left;
+    flex-grow: 1;
+}
+
+.project-list-container .dropdown-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 1vw;
+}
+
+.project-list-container .dropdown-btn img {
+    width: 1.5vw;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.project-list-container .project-item.active .dropdown-btn img {
+    transform: rotate(180deg); /* Dropdown dreht sich */
+}
+
+/* Projekt-Details */
+.project-list-container .project-details {
+    display: none;
+    flex-direction: column;
+    gap: 1.5vh;
+    padding: 2vh;
+    border: 1px solid #ddd;
+    border-radius: 0.5vw;
+    margin-top: 1vh;
+    background-color: #f9f9f9;
+    width: 100%;
+}
+
+.project-list-container .project-item.active .project-details {
+    display: flex;
+}
+
+/* Speichern Button in Projektauflistung */
+.project-list-container .save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
+/* Styles nur für das Projekt-Erstellen-Formular */
+.project-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.project-form {
+    background-color: #f2f2f2;
+    padding: 3vh 2vw;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 25vw;
+}
+
+.project-input {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.project-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+}
+
+/* Dropdown Styles spezifisch für das Formular */
+.project-form-container .custom-select-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.project-form-container .custom-select-placeholder {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.project-form-container .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.project-form-container .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.project-form-container .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-form-container .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.project-form-container .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+/* Styling nur für das Projekt-Erstellen-Formular */
+.project-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.project-form {
+    background-color: #f2f2f2;
+    padding: 3vh 2vw;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 70%; /* Erhöhte Breite des Formulars */
+    max-width: 800px; /* Maximale Breite für große Bildschirme */
+}
+
+.project-form-group {
+    margin-bottom: 1.5vh;
+}
+
+.project-form-group label {
+    font-size: 1.2vw;
+    display: block;
+    margin-bottom: 0.5vh;
+}
+
+.project-form-input {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.project-save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+}
+
+/* Scoped Dropdown Styles für Personen */
+.project-form-container .custom-select-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.project-form-container .custom-select-placeholder {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.project-form-container .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.project-form-container .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.project-form-container .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-form-container .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.project-form-container .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+.project-save-btn:hover {
+    background-color: #66a832;
+}
+
+.delete-btn {
+    background-color: #d9534f;
+    color: white;
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.3vw;
+}
+
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    gap: 1vw;
+    padding-top: 1vh;
 }

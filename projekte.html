@@ -1,22 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projektübersicht</title>
+    <meta charset="UTF-8">
+    <title>Projekte</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <div id="app" class="container">
+    <div id="app-projekte" class="container">
         <!-- Sidebar -->
-=======
-=======
->>>>>>> parent of 5a525d3 (v.1.87)
-    <div class="container">
-        <!-- Sidebar (keine Änderungen) -->
->>>>>>> parent of 5a525d3 (v.1.87)
         <nav class="sidebar">
             <div class="content">
                 <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
@@ -31,77 +24,30 @@
             </div>
         </nav>
 
-        <!-- Main Content (Project Overview) -->
-        <div class="main-content">
-            <ul class="project-list">
-                <!-- Project Item with Dropdown -->
-                <li class="project-item">
-                    <span class="project-name">Laurins wunderprojekt</span>
-                    <button class="dropdown-btn">
-                        <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown">
-                    </button>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-                    <!-- Conditionally show project details -->
-                    <div v-if="project.showDetails" class="project-details">
-=======
-                    <div class="project-details">
->>>>>>> parent of 5a525d3 (v.1.87)
-=======
-                    <div class="project-details">
->>>>>>> parent of 5a525d3 (v.1.87)
-                        <label>Projektname</label>
-                        <input type="text" class="form-input" value="Landingpage xponetiq.com">
-                        
-                        <label>Kunde</label>
-                        <input type="text" class="form-input" value="21 Impact Labs AG – K0030">
-                        
-                        <label>Zugewiesene Personen</label>
-                        <!-- Display list of assigned people -->
-                        <div class="assigned-people-list">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <div v-for="person in project.assignedPersons" :key="person.id" class="person">
-                                <span>{{ person.firstName }} {{ person.lastName }}</span>
-                                <button @click="removePerson(project.id, person.id)" class="remove-person-btn">Entfernen</button>
-=======
-=======
->>>>>>> parent of 5a525d3 (v.1.87)
-                            <div class="person">
-                                <span>Simon Pfister</span>
-                                <button class="remove-person-btn">Entfernen</button>
-                            </div>
-                            <div class="person">
-                                <span>Cheyenne Wäny</span>
-                                <button class="remove-person-btn">Entfernen</button>
-<<<<<<< HEAD
->>>>>>> parent of 5a525d3 (v.1.87)
-=======
->>>>>>> parent of 5a525d3 (v.1.87)
+        <!-- Hauptinhalt -->
+        <div class="main-content project-list-container">
+            <div v-if="projects.length === 0" class="loading-message">Lade Projekte...</div>
+            <div v-else>
+                <ul class="project-list">
+                    <li v-for="project in projects" :key="project.ID" class="project-item" :class="{ active: editDropdownVisible === project.ID }">
+                        <span class="project-name">{{ project.Name }}</span>
+                        <button @click="toggleEditDropdown(project.ID)" class="dropdown-btn">
+                            <img src="Assets/svg/chevron-dropdown.svg" alt="Dropdown Chevron">
+                        </button>
+                        <div v-if="editDropdownVisible === project.ID" class="project-details">
+                            <label>Projektname: <input v-model="project.Name" /></label>
+                            <label>Beschreibung: <input v-model="project.Description" /></label>
+                            <div class="button-group">
+                                <button @click="saveProject(project)" class="save-btn">Speichern</button>
+                                <button @click="deleteProject(project.ID)" class="delete-btn">Löschen</button>
                             </div>
                         </div>
-                        
-                        <!-- Dropdown to add new people -->
-                        <select class="form-input select-person">
-                            <option value="" disabled selected>Weitere Person wählen</option>
-                            <option value="Person 1">Person 1</option>
-                            <option value="Person 2">Person 2</option>
-                            <option value="Person 3">Person 3</option>
-                            <!-- Add more people as options here -->
-                        </select>
-
-                        <div class="button-group">
-                            <button class="delete-btn">Löschen</button>
-                            <button class="save-btn">Speichern</button>
-                        </div>
-                    </div>
-                </li>
-                <!-- Additional project items can be added here -->
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app-projekte.js"></script>
 </body>
 </html>
