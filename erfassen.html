@@ -6,9 +6,10 @@
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/assets/api.js" defer></script>
 </head>
 <body>
-    <div class="container">
+    <div id="customer" class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -23,34 +24,34 @@
                 <p>Made by Laurin & Niki</p>
             </div>
         </nav>
-
+ 
         <!-- Hauptinhalt -->
-        <div class="main-content">
+        <div id="appp" class="main-content">
             <div class="form-container">
-                <form class="project-form">
-                    <label for="project-name">Projektname</label>
-                    <input type="text" id="project-name" placeholder="Projektname" class="form-input">
-
-                    <label for="client">Kunde</label>
-                    <select id="client" class="form-input">
-                        <option>Kunde auswählen</option>
-                        <!-- Weitere Kundenoptionen hier -->
+                <form @submit.prevent="submitForm" class="project-form">
+                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
+                   
+                    <!-- Dropdown für Kunden -->
+                    <select v-model="selectedCustomer" class="form-input">
+                        <option disabled value="">Kunde auswählen</option>
+                        <option v-for="customer in customers" :key="customer.id" :value="customer.id">
+                            {{ customer.companyName }}
+                        </option>
                     </select>
-
-                    <label for="assigned-persons">Personen zuweisen</label>
-                    <select id="assigned-persons" class="form-input">
+ 
+                    <!-- Dropdown für Personen -->
+                    <select v-model="StudentId" class="student-select form-input">
                         <option>Personen zuweisen</option>
-                        <!-- Weitere Personenoptionen hier -->
+                        <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
+ 
                     </select>
-
-                    <div class="form-buttons">
-                        <button type="submit" class="save-btn">Speichern</button>
-                    </div>
+ 
+                    <button type="submit" class="save-btn">Speichern</button>
                 </form>
             </div>
         </div>
     </div>
-
-    <script src="app-erfassen.js"></script>
+    <script src="appp.js"></script>
 </body>
 </html>
+ 
