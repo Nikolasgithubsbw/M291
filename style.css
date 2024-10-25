@@ -361,3 +361,65 @@ select::-ms-expand {
     align-items: center;
     padding: 1vh;
 }
+/* Custom Styles für das neue Personen-Dropdown auf der erfassen Seite */
+#app-erfassen .custom-select-container {
+    position: relative;
+    cursor: pointer;
+}
+
+#app-erfassen .custom-select-placeholder {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#app-erfassen .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#app-erfassen .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#app-erfassen .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#app-erfassen .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+#app-erfassen .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+#app-erfassen .custom-select-dropdown label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#app-erfassen .custom-select-dropdown input[type="checkbox"] {
+    margin-right: 10px;
+}

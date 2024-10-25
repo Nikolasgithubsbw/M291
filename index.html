@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="UTF-8">
-<title>Zeiterfassung</title>
-<link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Zeiterfassung</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-<div class="container">
-<!-- Sidebar -->
-<nav class="sidebar">
-<div class="content">
-<a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
-<ul class="nav-list">
-<li><a href="index.html">Zeiterfassung</a></li>
-<li><a href="projekte.html">Projekte</a></li>
-</ul>
-</div>
-<div class="logo-container">
-<img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
-<p>Made by Laurin & Niki</p>
-</div>
-</nav>
- 
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="content">
+                <a href="erfassen.html" class="add-project-btn">+ Projekt hinzufügen</a>
+                <ul class="nav-list">
+                    <li><a href="index.html">Zeiterfassung</a></li>
+                    <li><a href="projekte.html">Projekte</a></li>
+                </ul>
+            </div>
+            <div class="logo-container">
+                <img src="Assets/svg/sbw+neue-medien.svg" alt="SBW Neue Medien Logo">
+                <p>Made by Laurin & Niki</p>
+            </div>
+        </nav>
+
         <!-- Hauptinhalt -->
-<div class="main-content">
-<!-- Zeiterfassung -->
-<div class="time-tracking">
-<div class="left-column">
-<select class="project-select form-input">
-<option>Projekt auswählen</option>
-</select>
-<select class="task-select form-input">
-<option>Abteilung auswählen</option>
-</select>
-</div>
-<div class="right-column">
-<div class="time-input">
-<!-- Angepasst für das Format Stunden:Minuten (0:00) -->
-<input type="text" class="form-input time-field" placeholder="0:00">
-</div>
-<input type="text" class="description form-input" placeholder="Beschreibung der Tätigkeit - optional">
-</div>
-<button class="save-btn">Speichern</button>
-</div>
-</div>
-</div>
- 
+        <div class="main-content">
+            <!-- Zeiterfassung -->
+            <div class="time-tracking" id="app">
+                <div class="left-column">
+                    <!-- Projekt-Dropdown (mit Daten aus der API) -->
+                    <select v-model="selectedProject" class="project-select form-input" required>
+                        <option disabled value="">Projekt auswählen</option>
+                        <option v-for="project in projects" :key="project.ID" :value="project.ID">{{ project.Name }}</option>
+                    </select>
+
+                    <!-- Personen-Dropdown (mit Daten aus der API) -->
+                    <select v-model="selectedPerson" class="task-select form-input" required>
+                        <option disabled value="">Person auswählen</option>
+                        <option v-for="person in persons" :key="person.id" :value="person.id">{{ person.fullname }}</option>
+                    </select>
+                </div>
+
+                <div class="right-column">
+                    <div class="time-input">
+                        <!-- Angepasst für das Format Stunden:Minuten (0:00) -->
+                        <input type="text" class="form-input time-field" placeholder="0:00" required>
+                    </div>
+                    <input v-model="description" type="text" class="description form-input" placeholder="Beschreibung der Tätigkeit" required>
+                </div>
+
+                <button @click="submitForm" class="save-btn">Speichern</button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

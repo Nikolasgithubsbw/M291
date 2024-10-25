@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Projekt erfassen</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="/assets/api.js" defer></script>
 </head>
 <body>
-    <div id="customer" class="container">
+    <div class="container">
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="content">
@@ -24,34 +23,46 @@
                 <p>Made by Laurin & Niki</p>
             </div>
         </nav>
- 
+
         <!-- Hauptinhalt -->
-        <div id="appp" class="main-content">
-            <div class="form-container">
-                <form @submit.prevent="submitForm" class="project-form">
-                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input">
-                   
+        <div class="main-content">
+            <!-- Formular zum Projekt Erfassen -->
+            <div id="app-erfassen" class="form-container">
+                <form @submit.prevent="submitProject" class="project-form">
+                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input" required>
+
                     <!-- Dropdown für Kunden -->
-                    <select v-model="selectedCustomer" class="form-input">
+                    <select v-model="selectedCustomer" class="form-input" required>
                         <option disabled value="">Kunde auswählen</option>
-                        <option v-for="customer in customers" :key="customer.id" :value="customer.id">
-                            {{ customer.companyName }}
+                        <option v-for="customer in customers" :key="customer.ID" :value="customer.ID">
+                            {{ customer.Name }}
                         </option>
                     </select>
- 
-                    <!-- Dropdown für Personen -->
-                    <select v-model="StudentId" class="student-select form-input">
-                        <option>Personen zuweisen</option>
-                        <option v-for="student in students" :key="student.id" :value="student.id">{{ student.name }}</option>
- 
-                    </select>
- 
-                    <button type="submit" class="save-btn">Speichern</button>
+
+                    <!-- Personen-Zuweisung (Mehrfachauswahl und Suche) -->
+                    <div ref="personDropdown" class="form-input custom-select-container">
+                        <span class="custom-select-placeholder" @click="togglePersonDropdown">
+                            {{ selectedPersons.length > 0 ? selectedPersons.length + ' Personen ausgewählt' : 'Personen zuweisen' }}
+                        </span>
+                        <div v-if="showPersonDropdown" class="custom-select-dropdown">
+                            <input type="text" v-model="personSearch" placeholder="Suche nach Personen..." class="dropdown-search-input">
+                            <ul>
+                                <li v-for="person in filteredPersons" :key="person.id">
+                                    <label>
+                                        <input type="checkbox" :value="person.id" v-model="selectedPersons">
+                                        {{ person.fullname }}
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="save-btn">Projekt speichern</button>
                 </form>
             </div>
         </div>
     </div>
-    <script src="appp.js"></script>
+
+    <script src="app-erfassen.js"></script>
 </body>
 </html>
- 
