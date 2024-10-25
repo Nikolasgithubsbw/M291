@@ -10,12 +10,23 @@ const appErfassen = Vue.createApp({
       selectedRoles: {}, // Rollen für ausgewählte Personen
       personSearch: "", // Suchbegriff für die Personenliste
       showPersonDropdown: false, // Kontrolliert, ob das Personen-Dropdown angezeigt wird
+      projectStudent: {
+        StudentID: 0,
+        ProjectID: 0,
+        Start: "2024-10-25",
+        ProjectRoleID: "",
+        End: "2024-10-26",
+      },
       newProject: {
-        CustomerID: 0, // ID des ausgewählten Kunden
-        Name: "", // Name des Projekts
-      }, 
-      Start: "", // Startdatum des Projekts
-      End: "", // Enddatum des Projekts
+        ParentID: 0,
+        Number: "",
+        Name: "",
+        Description: "",
+        TypeID: 0,
+        CustomerID: 0,
+        Coach: "",
+        Status: 0,
+      },
     };
   },
   computed: {
@@ -79,72 +90,57 @@ const appErfassen = Vue.createApp({
 
     // Speichere das Projekt und die ausgewählten Studenten mit ihren Rollen
     async saveProject() {
-      if (!this.projectName) {
+      // Validierung des Projektnamens
+      if (this.projectName.trim() === "") {
         alert("Bitte geben Sie einen Projektnamen ein.");
         return;
       }
-      if (!this.selectedCustomer) {
-        alert("Bitte wählen Sie einen Kunden aus.");
-        return;
-      }
-      if (this.selectedPersons.length === 0) {
-        alert("Bitte wählen Sie mindestens eine Person aus.");
-        return;
-      }
-
-      try {
-        // Speichere das Projekt
-        const projectResponse = await fetch("https://api-sbw-plc.sbw.media/Project", {
+      this.newProject.Name = this.projectName; // Setzen des Projektnummers
+      this.newProject.Number = ""; // Reset des Projektnummer
+      this.newProject.CustomerID = this.selectedCustomer; // Setzen des Kunden-IDs
+      this.newProject.Coach = ""; // Reset des Coaches
+      this.newProject.Status = 0; // Reset des Status
+      const URL = "https://api-sbw-plc.sbw.media/Project";
+      const response = await fetch(URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            Name: this.projectName,
-            CustomerID: this.selectedCustomer,
-          }),
+        body: JSON.stringify(this.newProject),
         });
-
-        if (!projectResponse.ok) {
+      if (!response.ok) {
           throw new Error("Fehler beim Speichern des Projekts");
         }
-
-        const projectData = await projectResponse.json();
-        const projectID = projectData.id; // ID des gespeicherten Projekts
-
-        // Speichere jede Person mit ihrer Rolle im Projekt
-        for (const studentID of this.selectedPersons) {
-          const roleID = this.selectedRoles[studentID];
-          await this.saveProjectStudent(projectID, studentID, roleID);
-        }
-
-        alert("Projekt und Zuweisungen erfolgreich gespeichert!");
-
-        // Nach dem Speichern des Projekts auf die Projektübersicht weiterleiten
-        window.location.href = "projekte.html"; // Leitet den Benutzer zur Projektübersicht weiter
-
-      } catch (error) {
-        console.error("Fehler beim Speichern des Projekts oder der Zuweisungen:", error);
-      }
+      console.log("Projekt gespeichert");
+      const data = await response.json();
+      const ProjectID = data.id; // Speichern des Projekt-IDs
+      this.selectedPersons.forEach((StudentID) => {
+        this.saveProjectStudent(ProjectID, StudentID); // Speichern des Projekt-Student-BeziehungsProjectStudent(ProjectID); // Speichern des Projekt-Student-Beziehungs
+      });
     },
-
-    // Speichere die Studenten-Rollen-Zuweisung im Projekt
-    async saveProjectStudent(ProjectID, StudentID, RoleID) {
-      try {
-        const response = await fetch("https://api-sbw-plc.sbw.media/Studentroleproject", {
+    async saveProjectStudent(ProjectID, StudentID) {
+      this.projectStudent.ProjectID = ProjectID;
+      this.projectStudent.StudentID = StudentID;
+      const URL = "https://api-sbw-plc.sbw.media/Studentroleproject";
+      const response = await fetch(URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            ProjectID,
-            StudentID,
-            ProjectRoleID: RoleID,
-            Start: this.Start,
-            End: this.End,
-          }),
-        });
-
+        body: JSON.stringify(this.projectStudent),
+      });
+      if (!response.ok) {
+        throw new Error("Fehler beim Speichern des Projekts");
+      }
+      console.log("Projekt gespeichert");
+      this.projectName = ""; // Reset des Projektnamens
+      this.selectedCustomer = ""; // Reset des ausgewählten Kunden
+      this.selectedPersons = []; // Reset der ausgewählten Personen
+    },
+    // Methode zum Laden der Personen von der API
+    async loadPersons() {
+      try {
+        const response = await fetch("https://api-sbw-plc.sbw.media/Student"); // URL der API für Personen
         if (!response.ok) {
           throw new Error("Fehler beim Speichern der Student-Rollen-Zuweisung");
         }
@@ -157,13 +153,37 @@ const appErfassen = Vue.createApp({
     togglePersonDropdown() {
       this.showPersonDropdown = !this.showPersonDropdown;
     },
+    // Methode zum Schließen des Personen-Dropdowns
+    closePersonDropdown(event) {
+      // Wenn der Klick außerhalb der Dropdown-Komponente erfolgt, schließe das Dropdown
+      if (!this.$refs.personDropdown.contains(event.target)) {
+        this.showPersonDropdown = false;
+      }
+    },
+    // Methode zum Übermitteln des Formulars
+    submitProject() {
+      if (
+        this.projectName === "" ||
+        this.selectedCustomer === "" ||
+        this.selectedPersons.length === 0
+      ) {
+        alert("Bitte füllen Sie alle Felder aus.");
+        return;
+      }
+      console.log("Projektname:", this.projectName);
+      console.log("Ausgewählter Kunde:", this.selectedCustomer);
+      console.log("Zugewiesene Personen:", this.selectedPersons);
+      // Hier kannst du die Logik für das Speichern des Projekts an den Server einfügen
+    },
   },
-
   mounted() {
-    this.loadCustomers();
-    this.loadPersons();
-    this.loadRoles();
-  }
+    this.loadCustomers(); // Kunden beim Laden der Seite erfassen.html laden
+    this.loadPersons(); // Personen beim Laden der Seite erfassen.html laden
+    document.addEventListener("click", this.closePersonDropdown); // Event-Listener zum Schließen des Dropdowns bei Klick außerhalb
+  },
+  beforeUnmount() {
+    document.removeEventListener("click", this.closePersonDropdown); // Entferne den Event-Listener beim Unmounten der Komponente
+  },
 });
 
 appErfassen.mount("#app-erfassen");

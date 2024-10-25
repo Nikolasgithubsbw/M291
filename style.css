@@ -729,3 +729,191 @@ select::-ms-expand {
     border-radius: 0.3vw;
 }
 
+/* Styles nur für das Projekt-Erstellen-Formular */
+.project-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.project-form {
+    background-color: #f2f2f2;
+    padding: 3vh 2vw;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 25vw;
+}
+
+.project-input {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.project-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+}
+
+/* Dropdown Styles spezifisch für das Formular */
+.project-form-container .custom-select-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.project-form-container .custom-select-placeholder {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.project-form-container .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.project-form-container .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.project-form-container .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-form-container .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.project-form-container .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+/* Styling nur für das Projekt-Erstellen-Formular */
+.project-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.project-form {
+    background-color: #f2f2f2;
+    padding: 3vh 2vw;
+    border-radius: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 70%; /* Erhöhte Breite des Formulars */
+    max-width: 800px; /* Maximale Breite für große Bildschirme */
+}
+
+.project-form-group {
+    margin-bottom: 1.5vh;
+}
+
+.project-form-group label {
+    font-size: 1.2vw;
+    display: block;
+    margin-bottom: 0.5vh;
+}
+
+.project-form-input {
+    padding: 1.5vh;
+    font-size: 1.2vw;
+    border: 1px solid #ccc;
+    border-radius: 0.3vw;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.project-save-btn {
+    padding: 1.5vh;
+    background-color: #7cc53b;
+    color: white;
+    border: none;
+    font-size: 1.2vw;
+    cursor: pointer;
+    border-radius: 0.5vw;
+}
+
+/* Scoped Dropdown Styles für Personen */
+.project-form-container .custom-select-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.project-form-container .custom-select-placeholder {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.project-form-container .custom-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+}
+
+.project-form-container .dropdown-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.project-form-container .custom-select-dropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+.project-form-container .custom-select-dropdown li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.project-form-container .custom-select-dropdown li:hover {
+    background-color: #f8f8f8;
+}
+
+.project-save-btn:hover {
+    background-color: #66a832;
+}
