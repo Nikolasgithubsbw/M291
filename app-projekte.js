@@ -47,4 +47,4 @@ const app = Vue.createApp({
         async saveProject(project) {
             // Funktion zum Speichern eines Projekts nach Bearbeitung
             console.log("Projekt gespeichert", project);
-       
+        }
