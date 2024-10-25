@@ -37,13 +37,13 @@
                     <!-- Startdatum -->
                     <div class="project-form-group">
                         <label for="startDate">Startdatum</label>
-                        <input v-model="Start" id="startDate" type="date" class="project-form-input" required>
+                        <input v-model="projectStudent.Start" id="startDate" type="date" class="project-form-input" required>
                     </div>
 
                     <!-- Enddatum -->
                     <div class="project-form-group">
                         <label for="endDate">Enddatum</label>
-                        <input v-model="End" id="endDate" type="date" class="project-form-input" required>
+                        <input v-model="projectStudent.End" id="endDate" type="date" class="project-form-input" required>
                     </div>
 
                     <!-- Dropdown für Kunden -->
@@ -67,7 +67,7 @@
                             <div v-if="showPersonDropdown" class="custom-select-dropdown">
                                 <input type="text" v-model="personSearch" placeholder="Suche nach Personen..." class="dropdown-search-input project-form-input">
                                 <ul>
-                                    <li v-for="person in filteredPersons" :key="person.id">
+                                    <li v-for="person in persons" :key="person.id">
                                         <label>
                                             <input type="checkbox" :value="person.id" v-model="selectedPersons">
                                             {{ person.fullname }}

@@ -72,17 +72,18 @@ const appErfassen = Vue.createApp({
     // Lade die Liste der Rollen von der API
     async loadRoles() {
       try {
-        const response = await fetch("https://api-sbw-plc.sbw.media/Studentroleproject");
+        const response = await fetch("https://api-sbw-plc.sbw.media/Projectrole");
         if (!response.ok) {
           throw new Error("Fehler beim Laden der Rollen");
         }
         const data = await response.json();
-        this.roles = [
-          { ID: "PL", Name: "Projektleiter" },
-          { ID: "GMA", Name: "Gruppenmitglied" },
-          { ID: "TMA", Name: "Teammitglied" },
-          { ID: "AMA", Name: "Assistent" }
-        ]; // Beispielhafte Rollen, bitte anpassen
+        this.roles = data.resources || [];
+        // this.roles = [
+        //   { ID: "PL", Name: "Projektleiter" },
+        //   { ID: "GMA", Name: "Gruppenmitglied" },
+        //   { ID: "TMA", Name: "Teammitglied" },
+        //   { ID: "AMA", Name: "Assistent" }
+        // ]; // Beispielhafte Rollen, bitte anpassen
       } catch (error) {
         console.error("Fehler beim Laden der Rollen:", error);
       }
@@ -137,17 +138,6 @@ const appErfassen = Vue.createApp({
       this.selectedCustomer = ""; // Reset des ausgewählten Kunden
       this.selectedPersons = []; // Reset der ausgewählten Personen
     },
-    // Methode zum Laden der Personen von der API
-    async loadPersons() {
-      try {
-        const response = await fetch("https://api-sbw-plc.sbw.media/Student"); // URL der API für Personen
-        if (!response.ok) {
-          throw new Error("Fehler beim Speichern der Student-Rollen-Zuweisung");
-        }
-      } catch (error) {
-        console.error("Fehler beim Speichern der Zuweisung:", error);
-      }
-    },
 
     // Umschalten des Personen-Dropdowns
     togglePersonDropdown() {
@@ -179,6 +169,7 @@ const appErfassen = Vue.createApp({
   mounted() {
     this.loadCustomers(); // Kunden beim Laden der Seite erfassen.html laden
     this.loadPersons(); // Personen beim Laden der Seite erfassen.html laden
+    this.loadRoles(); // Rollen beim Laden der Seite erfassen.html laden
     document.addEventListener("click", this.closePersonDropdown); // Event-Listener zum Schließen des Dropdowns bei Klick außerhalb
   },
   beforeUnmount() {
