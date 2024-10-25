@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Projekt erfassen</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css"> <!-- Verlinkung zur CSS-Datei -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- Vue.js -->
 </head>
 <body>
     <div class="container">
@@ -26,39 +26,70 @@
 
         <!-- Hauptinhalt -->
         <div class="main-content">
-            <!-- Formular zum Projekt Erfassen -->
-            <div id="app-erfassen" class="form-container">
-                <form @submit.prevent="submitProject" class="project-form">
-                    <input v-model="projectName" type="text" placeholder="Projektname" class="form-input" required>
+            <div id="app-erfassen" class="form-container project-form-container">
+                <form @submit.prevent="saveProject" class="project-form">
+                    <!-- Projektname -->
+                    <div class="project-form-group">
+                        <label for="projectName">Projektname</label>
+                        <input v-model="projectName" id="projectName" type="text" placeholder="Projektname" class="project-form-input" required>
+                    </div>
+
+                    <!-- Startdatum -->
+                    <div class="project-form-group">
+                        <label for="startDate">Startdatum</label>
+                        <input v-model="newProject.Start" id="startDate" type="date" class="project-form-input" required>
+                    </div>
+
+                    <!-- Enddatum -->
+                    <div class="project-form-group">
+                        <label for="endDate">Enddatum</label>
+                        <input v-model="newProject.End" id="endDate" type="date" class="project-form-input" required>
+                    </div>
 
                     <!-- Dropdown für Kunden -->
-                    <select v-model="selectedCustomer" class="form-input" required>
-                        <option disabled value="">Kunde auswählen</option>
-                        <option v-for="customer in customers" :key="customer.ID" :value="customer.ID">
-                            {{ customer.Name }}
-                        </option>
-                    </select>
+                    <div class="project-form-group">
+                        <label for="customer">Kunde</label>
+                        <select v-model="selectedCustomer" id="customer" class="project-form-input" required>
+                            <option disabled value="">Kunde auswählen</option>
+                            <option v-for="customer in customers" :key="customer.ID" :value="customer.ID">
+                                {{ customer.Name }}
+                            </option>
+                        </select>
+                    </div>
 
                     <!-- Personen-Zuweisung (Mehrfachauswahl und Suche) -->
-                    <div ref="personDropdown" class="form-input custom-select-container">
-                        <span class="custom-select-placeholder" @click="togglePersonDropdown">
-                            {{ selectedPersons.length > 0 ? selectedPersons.length + ' Personen ausgewählt' : 'Personen zuweisen' }}
-                        </span>
-                        <div v-if="showPersonDropdown" class="custom-select-dropdown">
-                            <input type="text" v-model="personSearch" placeholder="Suche nach Personen..." class="dropdown-search-input">
-                            <ul>
-                                <li v-for="person in filteredPersons" :key="person.id">
-                                    <label>
-                                        <input type="checkbox" :value="person.id" v-model="selectedPersons">
-                                        {{ person.fullname }}
-                                    </label>
-                                </li>
-                            </ul>
+                    <div class="project-form-group">
+                        <label>Personen zuweisen</label>
+                        <div ref="personDropdown" class="project-form-input custom-select-container">
+                            <span @click="togglePersonDropdown">
+                                {{ selectedPersons.length > 0 ? selectedPersons.length + ' Personen ausgewählt' : 'Personen zuweisen' }}
+                            </span>
+                            <div v-if="showPersonDropdown" class="custom-select-dropdown">
+                                <input type="text" v-model="personSearch" placeholder="Suche nach Personen..." class="dropdown-search-input project-form-input">
+                                <ul>
+                                    <li v-for="person in filteredPersons" :key="person.id">
+                                        <label>
+                                            <input type="checkbox" :value="person.id" v-model="selectedPersons">
+                                            {{ person.fullname }}
+                                        </label>
+
+                                        <!-- Rollen Dropdown für jede Person -->
+                                        <select v-model="selectedRoles[person.id]" class="project-form-input" required>
+                                            <option disabled value="">Rolle auswählen</option>
+                                            <option v-for="role in roles" :key="role.ID" :value="role.ID">
+                                                {{ role.Name }}
+                                            </option>
+                                        </select>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
-                    <button v-on:click="saveProject" class="save-btn">Projekt speichern</button>
-                    
+                    <!-- Speichern Button -->
+                    <div class="project-form-group">
+                        <button type="submit" class="project-save-btn">Projekt speichern</button>
+                    </div>
                 </form>
             </div>
         </div>
